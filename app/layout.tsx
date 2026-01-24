@@ -1,5 +1,7 @@
-import type { Metadata } from 'next'
-import { DM_Sans, Source_Serif_4 } from 'next/font/google'
+import { DM_Sans, Source_Serif_4 } from 'next/font/google';
+
+import type { Metadata } from 'next';
+
 
 import './globals.scss'
 
