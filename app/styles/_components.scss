@@ -1,0 +1,26 @@
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-6 py-3 font-medium transition-colors;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+    @apply disabled:pointer-events-none disabled:opacity-50;
+
+    &-primary {
+      @apply btn bg-primary text-white hover:bg-primary-hover;
+    }
+
+    &-secondary {
+      @apply btn border-2 border-primary bg-transparent text-primary;
+      @apply hover:bg-primary hover:text-white;
+    }
+  }
+
+  .card {
+    @apply rounded-xl bg-white p-6 shadow-sm;
+  }
+
+  .input {
+    @apply w-full rounded-lg border border-neutral-light px-4 py-3;
+    @apply text-neutral-dark placeholder:text-neutral-medium;
+    @apply focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary;
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "extends": ["next/core-web-vitals"],
+  "rules": {
+    // Enforce consistent code style
+    "prefer-const": "error",
+    "no-var": "error",
+
+    // React specific
+    "react/self-closing-comp": "error",
+    "react/jsx-curly-brace-presence": ["error", { "props": "never", "children": "never" }],
+
+    // Import organization
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          ["parent", "sibling"],
+          "index",
+          "type"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
+}
