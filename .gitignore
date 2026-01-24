@@ -1,36 +1,98 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ============================================
+# LINKEDIN POST PRO - GITIGNORE
+# ============================================
 
-# dependencies
-/node_modules
-/.pnp
+# --------------------------------------------
+# DEPENDENCIES
+# --------------------------------------------
+node_modules/
+.pnp/
 .pnp.js
 
-# testing
-/coverage
+# --------------------------------------------
+# NEXT.JS BUILD
+# --------------------------------------------
+.next/
+out/
+build/
+dist/
 
-# next.js
-/.next/
-/out/
+# --------------------------------------------
+# ENVIRONMENT VARIABLES - CRITICAL!
+# --------------------------------------------
+# Estos archivos contienen claves sensibles
+# NUNCA deben subirse a git
 
-# production
-/build
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# misc
-.DS_Store
+# El archivo .env.example SÍ se sube (es el template)
+# !.env.example  <- esto lo incluye por defecto
+
+# --------------------------------------------
+# SECRETS & CREDENTIALS
+# --------------------------------------------
 *.pem
+*.key
+*.crt
+*.p12
+credentials.json
+service-account.json
 
-# debug
+# --------------------------------------------
+# IDE & EDITOR
+# --------------------------------------------
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# --------------------------------------------
+# OS FILES
+# --------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+
+# --------------------------------------------
+# LOGS
+# --------------------------------------------
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# local env files
-.env*.local
-.env
+# --------------------------------------------
+# TESTING
+# --------------------------------------------
+coverage/
+.nyc_output/
 
-# vercel
+# --------------------------------------------
+# VERCEL
+# --------------------------------------------
 .vercel
 
-# typescript
+# --------------------------------------------
+# TYPESCRIPT
+# --------------------------------------------
 *.tsbuildinfo
-next-env.d.ts
+
+# --------------------------------------------
+# MISC
+# --------------------------------------------
+.turbo/
+*.cache
+.eslintcache
+
+# --------------------------------------------
+# AI
+# --------------------------------------------
+.claude/

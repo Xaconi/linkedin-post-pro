@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// @import es necesario aquí porque @use debe ir antes de cualquier regla,
+// y las directivas @tailwind cuentan como reglas.
+// Los partials internamente usan @use para importar variables.
+@import 'styles/base';
+@import 'styles/components';
+@import 'styles/animations';
+@import 'styles/utilities';

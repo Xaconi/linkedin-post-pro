@@ -1,0 +1,24 @@
+$color-primary: #0a66c2;
+$color-primary-hover: #004182;
+$color-primary-light: #70b5f9;
+
+$color-secondary: #057642;
+$color-secondary-hover: #045630;
+$color-secondary-light: #7fc15e;
+
+$color-neutral-dark: #191919;
+$color-neutral-medium: #666666;
+$color-neutral-light: #f3f2ef;
+
+$color-error: #cc1016;
+$color-error-light: #f5c6c6;
+
+$gradient-primary: linear-gradient(135deg, $color-primary 0%, $color-primary-hover 100%);
+$gradient-subtle: linear-gradient(180deg, #ffffff 0%, $color-neutral-light 100%);
+
+$timing-fast: 0.2s;
+$timing-normal: 0.3s;
+$timing-slow: 0.6s;
+
+$easing-default: ease-out;
+$easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
