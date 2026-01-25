@@ -1,7 +1,7 @@
-import { DM_Sans, Source_Serif_4 } from 'next/font/google';
+import { ClerkProvider } from '@clerk/nextjs'
+import { DM_Sans, Source_Serif_4 } from 'next/font/google'
 
-import type { Metadata } from 'next';
-
+import type { Metadata } from 'next'
 
 import './globals.scss'
 
@@ -40,10 +40,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es">
-      <body className={`${dmSans.variable} ${sourceSerif.variable} font-sans antialiased`}>
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="es">
+        <body className={`${dmSans.variable} ${sourceSerif.variable} font-sans antialiased`}>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }
