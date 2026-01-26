@@ -1,2 +1,6 @@
 export { LogoIcon } from './LogoIcon'
 export { CheckIcon } from './CheckIcon'
+export { ChevronDownIcon } from './ChevronDownIcon'
+export { LogoutIcon } from './LogoutIcon'
+export { EditIcon } from './EditIcon'
+export { ClockIcon } from './ClockIcon'

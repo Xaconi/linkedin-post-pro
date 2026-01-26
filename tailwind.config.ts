@@ -45,6 +45,15 @@ const config: Config = {
         'xl': '12px',
         '2xl': '16px',
       },
+      animation: {
+        'fade-in-up': 'fadeInUp 0.2s ease-out',
+      },
+      keyframes: {
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(4px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
     },
   },
   plugins: [],
