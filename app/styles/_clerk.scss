@@ -1,0 +1,171 @@
+@use './variables' as *;
+
+.cl-rootBox {
+  width: 100%;
+
+  .cl-socialButtonsBlockButton {
+    border: 1px solid var(--gradient-subtle);
+    border-radius: 12px;
+    padding: 12px 16px;
+    height: 48px;
+    font-weight: 500;
+    background-color: $color-white;
+    transition: all $timing-fast ease;
+
+    &:hover {
+      background-color: $color-neutral-lightest;
+      border-color: var(--gradient-subtle);
+    }
+  }
+
+  .cl-socialButtonsIconButton {
+    border: 1px solid var(--gradient-subtle);
+    border-radius: 12px;
+    background-color: $color-white;
+
+    &:hover {
+      background-color: $color-neutral-lightest;
+      border-color: var(--gradient-subtle);
+    }
+  }
+
+  .cl-formFieldInput {
+    border: 1px solid var(--gradient-subtle);
+    border-radius: 12px;
+    padding: 12px 16px;
+    height: 48px;
+    font-size: 16px;
+    background-color: $color-white;
+    transition: border-color $timing-fast ease;
+
+    &:hover {
+      border-color: var(--gradient-subtle);
+    }
+
+    &:focus {
+      border-color: $color-primary;
+      outline: none;
+    }
+  }
+
+  .cl-formButtonPrimary {
+    background-color: $color-primary;
+    border: none;
+    border-radius: 12px;
+    height: 48px;
+    font-weight: 500;
+    font-size: 16px;
+    transition: background-color $timing-fast ease;
+
+    &:hover {
+      background-color: $color-primary-hover;
+    }
+
+    &:focus {
+      outline: 2px solid $color-primary;
+      outline-offset: 2px;
+    }
+  }
+
+  .cl-formFieldLabel {
+    color: $color-neutral-dark;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .cl-lastAuthenticationStrategyBadge {
+    display: none;
+  }
+
+  .cl-formFieldHintText {
+    margin-bottom: 6px;
+  }
+
+  .cl-dividerRow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .cl-dividerLine {
+    flex: 1;
+    height: 1px;
+    background-color: $color-neutral-light;
+  }
+
+  .cl-dividerText {
+    color: $color-neutral-medium;
+    font-size: 14px;
+    text-transform: lowercase;
+  }
+
+  .cl-formFieldAction {
+    color: $color-primary;
+
+    &:hover {
+      color: $color-primary-hover;
+    }
+  }
+
+  .cl-card {
+    box-shadow: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  .cl-cardBox {
+    box-shadow: none;
+    border: none;
+    width: 100%;
+    padding: 8px;
+  }
+
+  .cl-header,
+  .cl-headerTitle,
+  .cl-headerSubtitle,
+  .cl-footer,
+  .cl-footerAction {
+    display: none;
+  }
+
+  .cl-otpCodeFieldInput {
+    border: 1px solid var(--gradient-subtle);
+    border-radius: 8px;
+
+    &:focus {
+      border-color: $color-primary;
+    }
+  }
+
+  .cl-identityPreviewEditButton {
+    color: $color-primary;
+
+    &:hover {
+      color: $color-primary-hover;
+    }
+  }
+
+  .cl-alert {
+    border-radius: 12px;
+  }
+
+  // Hide "Sign out of all devices" checkbox
+  .cl-formFieldRow__signOutOfOtherSessions {
+    display: none;
+  }
+}
+
+[data-clerk-component] {
+
+  .cl-socialButtonsBlockButton,
+  .cl-socialButtonsIconButton {
+    border: 1px solid var(--gradient-subtle);
+  }
+
+  .cl-formFieldInput {
+    border: 1px solid var(--gradient-subtle);
+  }
+}

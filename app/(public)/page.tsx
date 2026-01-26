@@ -1,5 +1,5 @@
 import { PostCardPreview } from '@features/landing'
-import { FeaturePill, StatusBadge } from '@shared/ui'
+import { FeaturePill, StatusBadge } from '@shared/components'
 
 export default function HomePage() {
   return (

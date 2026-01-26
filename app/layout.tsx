@@ -3,6 +3,7 @@ import { DM_Sans, Source_Serif_4 } from 'next/font/google'
 
 import type { Metadata } from 'next'
 
+import { clerkLocalization } from '@/lib/clerk'
 import './globals.scss'
 
 const dmSans = DM_Sans({
@@ -40,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider localization={clerkLocalization}>
       <html lang="es">
         <body className={`${dmSans.variable} ${sourceSerif.variable} font-sans antialiased`}>
           {children}

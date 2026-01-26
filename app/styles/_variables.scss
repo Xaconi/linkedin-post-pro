@@ -9,12 +9,16 @@ $color-secondary-light: #7fc15e;
 $color-neutral-dark: #191919;
 $color-neutral-medium: #666666;
 $color-neutral-light: #f3f2ef;
+$color-neutral-lightest: #fafafa;
 
 $color-error: #cc1016;
 $color-error-light: #f5c6c6;
 
+$color-white: #ffffff;
+
 $gradient-primary: linear-gradient(135deg, $color-primary 0%, $color-primary-hover 100%);
 $gradient-subtle: linear-gradient(180deg, #ffffff 0%, $color-neutral-light 100%);
+
 
 $timing-fast: 0.2s;
 $timing-normal: 0.3s;
