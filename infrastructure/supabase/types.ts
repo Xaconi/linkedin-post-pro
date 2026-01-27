@@ -92,6 +92,50 @@ export type Database = {
           }
         ]
       }
+      generated_posts: {
+        Row: {
+          id: string
+          user_id: string
+          input_idea: string
+          tone: string
+          region: string
+          variant_1: string
+          variant_2: string
+          variant_3: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          input_idea: string
+          tone: string
+          region: string
+          variant_1: string
+          variant_2: string
+          variant_3: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          input_idea?: string
+          tone?: string
+          region?: string
+          variant_1?: string
+          variant_2?: string
+          variant_3?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'generated_posts_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never

@@ -98,6 +98,37 @@ CREATE TRIGGER update_subscriptions_updated_at
   FOR EACH ROW
   EXECUTE FUNCTION update_updated_at_column();
 
+-- --------------------------------------------
+-- GENERATED POSTS TABLE
+-- --------------------------------------------
+-- Stores AI-generated LinkedIn posts
+
+CREATE TABLE IF NOT EXISTS generated_posts (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  input_idea TEXT NOT NULL,
+  tone TEXT NOT NULL CHECK (tone IN ('professional', 'friendly', 'inspirational')),
+  region TEXT NOT NULL CHECK (region IN ('spain', 'latam')),
+  variant_1 TEXT NOT NULL,
+  variant_2 TEXT NOT NULL,
+  variant_3 TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- Index for user lookups and sorting by date
+CREATE INDEX IF NOT EXISTS idx_posts_user_id ON generated_posts(user_id);
+CREATE INDEX IF NOT EXISTS idx_posts_created_at ON generated_posts(created_at DESC);
+
+-- Enable RLS
+ALTER TABLE generated_posts ENABLE ROW LEVEL SECURITY;
+
+-- Policy: Service role full access
+CREATE POLICY "Service role full access on generated_posts"
+  ON generated_posts
+  FOR ALL
+  USING (true)
+  WITH CHECK (true);
+
 -- ============================================
 -- END OF SCHEMA
 -- ============================================

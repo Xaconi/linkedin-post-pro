@@ -21,6 +21,10 @@ export type {
   UpdateSubscriptionData,
   SubscriptionPlan,
   SubscriptionStatus,
+  GeneratedPost,
+  CreateGeneratedPostData,
+  PostTone,
+  PostRegion,
 } from './entities'
 
 // Factories (create and validate entities)
@@ -45,4 +49,4 @@ export {
 export type { PlanConfig } from './constants'
 
 // Repository Interfaces
-export type { IUserRepository, ISubscriptionRepository } from './repositories'
+export type { IUserRepository, ISubscriptionRepository, IGeneratedPostRepository } from './repositories'

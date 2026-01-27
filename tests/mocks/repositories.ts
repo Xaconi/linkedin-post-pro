@@ -5,6 +5,7 @@
 
 import type { IUserRepository } from '@/domain/repositories/user-repository'
 import type { ISubscriptionRepository } from '@/domain/repositories/subscription-repository'
+import type { IGeneratedPostRepository } from '@/domain/repositories/generated-post-repository'
 import type { User, CreateUserData, UpdateUserData } from '@/domain/entities/user'
 import type {
   Subscription,
@@ -12,6 +13,7 @@ import type {
   UpdateSubscriptionData,
   SubscriptionPlan,
 } from '@/domain/entities/subscription'
+import type { GeneratedPost, CreateGeneratedPostData } from '@/domain/entities/generated-post'
 import { getPostsLimitForPlan } from '@/domain'
 
 export class MockUserRepository implements IUserRepository {
@@ -200,5 +202,55 @@ export class MockSubscriptionRepository implements ISubscriptionRepository {
 
   getAll(): Subscription[] {
     return Array.from(this.subscriptions.values())
+  }
+}
+
+export class MockGeneratedPostRepository implements IGeneratedPostRepository {
+  private posts: Map<string, GeneratedPost> = new Map()
+  private userIdIndex: Map<string, string[]> = new Map()
+
+  async findById(id: string): Promise<GeneratedPost | null> {
+    return this.posts.get(id) ?? null
+  }
+
+  async findByUserId(userId: string): Promise<GeneratedPost[]> {
+    const postIds = this.userIdIndex.get(userId) ?? []
+    return postIds
+      .map((id) => this.posts.get(id))
+      .filter((post): post is GeneratedPost => post !== undefined)
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+  }
+
+  async create(data: CreateGeneratedPostData): Promise<GeneratedPost> {
+    const id = `post-${Date.now()}-${Math.random().toString(36).slice(2)}`
+    const now = new Date()
+
+    const post: GeneratedPost = {
+      id,
+      userId: data.userId,
+      inputIdea: data.inputIdea,
+      tone: data.tone,
+      region: data.region,
+      variants: data.variants,
+      createdAt: now,
+    }
+
+    this.posts.set(id, post)
+
+    const userPosts = this.userIdIndex.get(data.userId) ?? []
+    userPosts.push(id)
+    this.userIdIndex.set(data.userId, userPosts)
+
+    return post
+  }
+
+  // Test helpers
+  clear(): void {
+    this.posts.clear()
+    this.userIdIndex.clear()
+  }
+
+  getAll(): GeneratedPost[] {
+    return Array.from(this.posts.values())
   }
 }
