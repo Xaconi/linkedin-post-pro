@@ -3,8 +3,8 @@
 import { useState, useCallback } from 'react'
 
 import { LoadingSpinner } from '@/components/shared'
-import { IdeaTextarea, MIN_CHARACTERS, MAX_CHARACTERS } from './IdeaTextarea'
-import { PostTones, PostRegions } from '@/domain/entities/generated-post'
+import { IdeaTextarea } from './IdeaTextarea'
+import { PostTones, PostRegions, IdeaConstraints } from '@/domain/entities/generated-post'
 import type { PostTone, PostRegion } from '@/domain/entities/generated-post'
 
 export interface PostGeneratorFormData {
@@ -35,7 +35,7 @@ export function PostGeneratorForm({
   const [region] = useState<PostRegion>(PostRegions.SPAIN)
 
   const charCount = idea.length
-  const isValidLength = charCount >= MIN_CHARACTERS && charCount <= MAX_CHARACTERS
+  const isValidLength = charCount >= IdeaConstraints.MIN_LENGTH && charCount <= IdeaConstraints.MAX_LENGTH
   const hasPostsRemaining = postsRemaining > 0
   const canSubmit = isValidLength && hasPostsRemaining && !isLoading && !disabled
 
@@ -43,6 +43,7 @@ export function PostGeneratorForm({
     async (e: React.FormEvent) => {
       e.preventDefault()
       if (!canSubmit) return
+
 
       await onSubmit({ idea: idea.trim(), tone, region })
     },
