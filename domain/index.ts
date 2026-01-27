@@ -29,7 +29,8 @@ export type {
 
 export {
   PostTones,
-  PostRegions
+  PostRegions,
+  IdeaConstraints,
 } from './entities'
 
 // Factories (create and validate entities)

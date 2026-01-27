@@ -10,6 +10,7 @@ import {
   type PostRegion,
   PostTones,
   PostRegions,
+  IdeaConstraints,
 } from '@/domain/entities/generated-post'
 
 export class GeneratedPostValidationError extends Error {
@@ -66,12 +67,12 @@ export class GeneratedPostFactory {
       throw new GeneratedPostValidationError('Input idea is required')
     }
 
-    if (data.inputIdea.trim().length < 10) {
-      throw new GeneratedPostValidationError('Input idea must be at least 10 characters')
+    if (data.inputIdea.trim().length < IdeaConstraints.MIN_LENGTH) {
+      throw new GeneratedPostValidationError(`Input idea must be at least ${IdeaConstraints.MIN_LENGTH} characters`)
     }
 
-    if (data.inputIdea.trim().length > 500) {
-      throw new GeneratedPostValidationError('Input idea must not exceed 500 characters')
+    if (data.inputIdea.trim().length > IdeaConstraints.MAX_LENGTH) {
+      throw new GeneratedPostValidationError(`Input idea must not exceed ${IdeaConstraints.MAX_LENGTH} characters`)
     }
 
     if (!data.tone || !VALID_TONES.includes(data.tone as PostTone)) {
@@ -109,12 +110,12 @@ export class GeneratedPostFactory {
       throw new GeneratedPostValidationError('Input idea is required')
     }
 
-    if (data.inputIdea.trim().length < 10) {
-      throw new GeneratedPostValidationError('Input idea must be at least 10 characters')
+    if (data.inputIdea.trim().length < IdeaConstraints.MIN_LENGTH) {
+      throw new GeneratedPostValidationError(`Input idea must be at least ${IdeaConstraints.MIN_LENGTH} characters`)
     }
 
-    if (data.inputIdea.trim().length > 500) {
-      throw new GeneratedPostValidationError('Input idea must not exceed 500 characters')
+    if (data.inputIdea.trim().length > IdeaConstraints.MAX_LENGTH) {
+      throw new GeneratedPostValidationError(`Input idea must not exceed ${IdeaConstraints.MAX_LENGTH} characters`)
     }
 
     if (!VALID_TONES.includes(data.tone)) {

@@ -1,45 +1,45 @@
-import { PostRegions, PostTones } from "@/domain"
+import { PostRegions, PostTones, IdeaConstraints } from "@/domain"
 
 export const POST_LIMITS = {
-  MAX_IDEA_LENGTH: 500,
-  MIN_IDEA_LENGTH: 10,
+  MAX_IDEA_LENGTH: IdeaConstraints.MAX_LENGTH,
+  MIN_IDEA_LENGTH: IdeaConstraints.MIN_LENGTH,
   VARIANTS_COUNT: 3,
   RATE_LIMIT_SECONDS: 10,
   MAX_TOKENS: 1500,
 } as const
 
-export const TONE_OPTIONS = {
-  professional: {
-    id: PostTones.PROFESSIONAL,
+export const TONE_OPTIONS = [
+  {
+    value: PostTones.PROFESSIONAL,
     label: 'Profesional',
     description: 'Formal y corporativo',
     icon: '💼',
   },
-  friendly: {
-    id: PostTones.FRIENDLY,
+  {
+    value: PostTones.FRIENDLY,
     label: 'Cercano',
     description: 'Conversacional y personal',
     icon: '😊',
   },
-  inspirational: {
-    id: PostTones.INSPIRATIONAL,
+  {
+    value: PostTones.INSPIRATIONAL,
     label: 'Inspiracional',
     description: 'Motivacional y emotivo',
     icon: '✨',
   },
-} as const
+] as const
 
-export const REGION_OPTIONS = {
-  spain: {
-    id: PostRegions.SPAIN,
+export const REGION_OPTIONS = [
+  {
+    value: PostRegions.SPAIN,
     label: 'España',
     description: 'Español de España',
     icon: '🇪🇸',
   },
-  latam: {
-    id: PostRegions.LATAM,
-    label: 'LATAM',
+  {
+    value: PostRegions.LATAM,
+    label: 'Latinoamérica',
     description: 'Español latinoamericano',
     icon: '🌎',
   },
-} as const
+] as const

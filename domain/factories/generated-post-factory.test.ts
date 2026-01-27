@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { GeneratedPostFactory, GeneratedPostValidationError } from './generated-post-factory'
 import type { RawGeneratedPostData } from './generated-post-factory'
-import { CreateGeneratedPostData, PostRegions, PostTones } from '../entities/generated-post'
+import { CreateGeneratedPostData, PostRegions, PostTones, IdeaConstraints } from '../entities/generated-post'
 
 const TEST_FIXTURES = {
   validRawData: {
@@ -30,8 +30,8 @@ const TEST_FIXTURES = {
   } as CreateGeneratedPostData,
   tones: [PostTones.PROFESSIONAL, PostTones.FRIENDLY, PostTones.INSPIRATIONAL] as const,
   regions: [PostRegions.SPAIN, PostRegions.LATAM] as const,
-  minIdeaLength: 10,
-  maxIdeaLength: 500,
+  minIdeaLength: IdeaConstraints.MIN_LENGTH,
+  maxIdeaLength: IdeaConstraints.MAX_LENGTH,
 }
 
 describe('GeneratedPostFactory', () => {
