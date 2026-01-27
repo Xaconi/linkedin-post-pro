@@ -26,10 +26,10 @@ const generatePostSchema = z.object({
     .min(10, 'La idea debe tener al menos 10 caracteres')
     .max(500, 'La idea no puede superar 500 caracteres'),
   tone: z.enum([PostTones.PROFESSIONAL, PostTones.FRIENDLY, PostTones.INSPIRATIONAL], {
-    errorMap: () => ({ message: 'Tono no válido' }),
+    error: 'Tono no válido',
   }),
   region: z.enum([PostRegions.SPAIN, PostRegions.LATAM], {
-    errorMap: () => ({ message: 'Región no válida' }),
+    error: 'Región no válida',
   }),
 })
 
@@ -76,8 +76,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       input = generatePostSchema.parse(body)
     } catch (error) {
       if (error instanceof z.ZodError) {
-        const firstError = error.errors[0]
-        return errorResponse(firstError.message, 400, 'VALIDATION_ERROR')
+        const firstIssue = error.issues[0]
+        return errorResponse(firstIssue.message, 400, 'VALIDATION_ERROR')
       }
       return errorResponse('Cuerpo de la petición inválido', 400, 'INVALID_BODY')
     }
