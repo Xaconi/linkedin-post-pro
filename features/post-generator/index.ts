@@ -1,3 +1,4 @@
+export { CopyButton, PostVariantCard, PostVariants } from './components'
 export {
   SelectorOption,
   ToneSelector,
@@ -5,7 +6,10 @@ export {
   RegionSelector,
   REGION_OPTIONS,
   PostGeneratorForm, 
-  IdeaTextarea
+  IdeaTextarea,
+  CopyButton, 
+  PostVariantCard, 
+  PostVariants
 } from './components'
 
 export type { PostGeneratorFormData } from './components'
