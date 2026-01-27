@@ -3,7 +3,7 @@
  * Prompts for generating LinkedIn posts in Spanish
  */
 
-import type { PostTone, PostRegion } from './types'
+import type { PostTone, PostRegion } from '@/domain/entities/generated-post'
 
 const TONE_DESCRIPTIONS: Record<PostTone, string> = {
   professional:

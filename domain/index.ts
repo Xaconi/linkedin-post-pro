@@ -24,7 +24,12 @@ export type {
   GeneratedPost,
   CreateGeneratedPostData,
   PostTone,
-  PostRegion,
+  PostRegion
+} from './entities'
+
+export {
+  PostTones,
+  PostRegions
 } from './entities'
 
 // Factories (create and validate entities)

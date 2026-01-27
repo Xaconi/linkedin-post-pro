@@ -3,12 +3,14 @@
  * Validates and creates GeneratedPost entities
  */
 
-import type {
-  GeneratedPost,
-  CreateGeneratedPostData,
-  PostTone,
-  PostRegion,
-} from '../entities/generated-post'
+import {
+  type GeneratedPost,
+  type CreateGeneratedPostData,
+  type PostTone,
+  type PostRegion,
+  PostTones,
+  PostRegions,
+} from '@/domain/entities/generated-post'
 
 export class GeneratedPostValidationError extends Error {
   constructor(message: string) {
@@ -27,8 +29,8 @@ export interface RawGeneratedPostData {
   createdAt: Date | string
 }
 
-const VALID_TONES: PostTone[] = ['professional', 'friendly', 'inspirational']
-const VALID_REGIONS: PostRegion[] = ['spain', 'latam']
+const VALID_TONES: PostTone[] = [PostTones.PROFESSIONAL, PostTones.FRIENDLY, PostTones.INSPIRATIONAL]
+const VALID_REGIONS: PostRegion[] = [PostRegions.SPAIN, PostRegions.LATAM]
 
 export class GeneratedPostFactory {
   /**

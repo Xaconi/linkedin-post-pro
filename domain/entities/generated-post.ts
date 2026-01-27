@@ -3,9 +3,18 @@
  * Technology-agnostic, no dependencies on Supabase/Claude/etc.
  */
 
-export type PostTone = 'professional' | 'friendly' | 'inspirational'
-export type PostRegion = 'spain' | 'latam'
+export enum PostTones {
+  PROFESSIONAL = 'professional',
+  FRIENDLY = 'friendly',
+  INSPIRATIONAL = 'inspirational',
+}
+export type PostTone = PostTones.PROFESSIONAL | PostTones.FRIENDLY | PostTones.INSPIRATIONAL
 
+export enum PostRegions {
+  SPAIN = 'spain',
+  LATAM = 'latam',
+}
+export type PostRegion = PostRegions.SPAIN | PostRegions.LATAM
 export interface GeneratedPost {
   id: string
   userId: string

@@ -1,59 +1,60 @@
 import { describe, it, expect } from 'vitest'
 import { buildSystemPrompt, buildUserPrompt } from './prompts'
-import type { PostTone, PostRegion } from './types'
+import { PostTone, PostRegion } from '@/domain'
+import { PostRegions, PostTones } from '@/domain'
 
 const TEST_FIXTURES = {
   idea: 'Cómo la IA está transformando el trabajo remoto',
-  tones: ['professional', 'friendly', 'inspirational'] as PostTone[],
-  regions: ['spain', 'latam'] as PostRegion[],
+  tones: [PostTones.PROFESSIONAL, PostTones.FRIENDLY, PostTones.INSPIRATIONAL] as PostTone[],
+  regions: [PostRegions.SPAIN, PostRegions.LATAM] as PostRegion[],
 }
 
 describe('Prompts', () => {
   describe('buildSystemPrompt', () => {
     it('includes LinkedIn copywriting context', () => {
-      const prompt = buildSystemPrompt('professional', 'spain')
+      const prompt = buildSystemPrompt(PostTones.PROFESSIONAL, PostRegions.SPAIN)
 
       expect(prompt).toContain('LinkedIn')
       expect(prompt).toContain('posts')
     })
 
     it('includes professional tone description', () => {
-      const prompt = buildSystemPrompt('professional', 'spain')
+      const prompt = buildSystemPrompt(PostTones.PROFESSIONAL, PostRegions.SPAIN)
 
       expect(prompt).toContain('Formal')
       expect(prompt).toContain('corporativo')
     })
 
     it('includes friendly tone description', () => {
-      const prompt = buildSystemPrompt('friendly', 'spain')
+      const prompt = buildSystemPrompt(PostTones.FRIENDLY, PostRegions.SPAIN)
 
       expect(prompt).toContain('Conversacional')
       expect(prompt).toContain('personal')
     })
 
     it('includes inspirational tone description', () => {
-      const prompt = buildSystemPrompt('inspirational', 'spain')
+      const prompt = buildSystemPrompt(PostTones.INSPIRATIONAL, PostRegions.SPAIN)
 
       expect(prompt).toContain('Motivacional')
       expect(prompt).toContain('emotivo')
     })
 
     it('includes Spain region instructions', () => {
-      const prompt = buildSystemPrompt('professional', 'spain')
+      const prompt = buildSystemPrompt(PostTones.PROFESSIONAL, PostRegions.SPAIN)
 
       expect(prompt).toContain('España')
       expect(prompt).toContain('vosotros')
     })
 
     it('includes LATAM region instructions', () => {
-      const prompt = buildSystemPrompt('professional', 'latam')
+      const prompt = buildSystemPrompt(PostTones.PROFESSIONAL, PostRegions.LATAM)
 
       expect(prompt).toContain('latinoamericano')
       expect(prompt).toContain('ustedes')
     })
 
     it('includes format rules', () => {
-      const prompt = buildSystemPrompt('professional', 'spain')
+      const prompt = buildSystemPrompt(PostTones.PROFESSIONAL, PostRegions.SPAIN)
 
       expect(prompt).toContain('3000')
       expect(prompt).toContain('emojis')
@@ -61,7 +62,7 @@ describe('Prompts', () => {
     })
 
     it('includes structure recommendations', () => {
-      const prompt = buildSystemPrompt('professional', 'spain')
+      const prompt = buildSystemPrompt(PostTones.PROFESSIONAL, PostRegions.SPAIN)
 
       expect(prompt).toContain('Hook')
       expect(prompt).toContain('llamada a la acción')
@@ -69,7 +70,7 @@ describe('Prompts', () => {
 
     it('generates different prompts for each tone', () => {
       const prompts = TEST_FIXTURES.tones.map((tone) =>
-        buildSystemPrompt(tone, 'spain')
+        buildSystemPrompt(tone, PostRegions.SPAIN)
       )
 
       const uniquePrompts = new Set(prompts)
@@ -78,7 +79,7 @@ describe('Prompts', () => {
 
     it('generates different prompts for each region', () => {
       const prompts = TEST_FIXTURES.regions.map((region) =>
-        buildSystemPrompt('professional', region)
+        buildSystemPrompt(PostTones.PROFESSIONAL, region)
       )
 
       const uniquePrompts = new Set(prompts)

@@ -6,9 +6,15 @@ export type {
   SubscriptionPlan,
   SubscriptionStatus,
 } from './subscription'
+
 export type {
   GeneratedPost,
   CreateGeneratedPostData,
   PostTone,
-  PostRegion,
+  PostRegion
+} from './generated-post'
+
+export {
+  PostTones,
+  PostRegions
 } from './generated-post'

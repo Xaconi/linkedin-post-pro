@@ -10,6 +10,7 @@ import { z } from 'zod'
 import { Container } from '@/application/container'
 import { generatePost, isClaudeApiError } from '@/infrastructure/claude'
 import type { PostTone, PostRegion } from '@/domain'
+import { PostTones, PostRegions } from '@/domain/entities/generated-post'
 
 /**
  * Input validation schema
@@ -19,11 +20,11 @@ const generatePostSchema = z.object({
     .string()
     .min(10, 'La idea debe tener al menos 10 caracteres')
     .max(500, 'La idea no puede superar 500 caracteres'),
-  tone: z.enum(['professional', 'friendly', 'inspirational'], {
-    errorMap: () => ({ message: 'Tono no válido' }),
+  tone: z.enum([PostTones.PROFESSIONAL, PostTones.FRIENDLY, PostTones.INSPIRATIONAL], {
+    error: 'Tono no válido'
   }),
-  region: z.enum(['spain', 'latam'], {
-    errorMap: () => ({ message: 'Región no válida' }),
+  region: z.enum([PostRegions.SPAIN, PostRegions.LATAM], {
+    error: 'Región no válida',
   }),
 })
 
@@ -84,7 +85,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       input = generatePostSchema.parse(body)
     } catch (error) {
       if (error instanceof z.ZodError) {
-        const firstError = error.errors[0]
+        const firstError = error
         return errorResponse(firstError.message, 400, 'VALIDATION_ERROR')
       }
       return errorResponse('Cuerpo de la petición inválido', 400, 'INVALID_BODY')
@@ -112,8 +113,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     try {
       const result = await generatePost({
         idea: input.idea,
-        tone: input.tone as PostTone,
-        region: input.region as PostRegion,
+        tone: input.tone as PostTones,
+        region: input.region as PostRegions,
       })
       variants = result.variants
     } catch (error) {

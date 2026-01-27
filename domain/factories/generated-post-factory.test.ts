@@ -1,15 +1,15 @@
 import { describe, it, expect } from 'vitest'
 import { GeneratedPostFactory, GeneratedPostValidationError } from './generated-post-factory'
 import type { RawGeneratedPostData } from './generated-post-factory'
-import type { CreateGeneratedPostData } from '../entities/generated-post'
+import { CreateGeneratedPostData, PostRegions, PostTones } from '../entities/generated-post'
 
 const TEST_FIXTURES = {
   validRawData: {
     id: 'post-123',
     userId: 'user-456',
     inputIdea: 'Cómo la IA está transformando el trabajo remoto',
-    tone: 'professional',
-    region: 'spain',
+    tone: PostTones.PROFESSIONAL,
+    region: PostRegions.SPAIN,
     variants: [
       'Post variante 1 con contenido completo',
       'Post variante 2 con contenido diferente',
@@ -20,16 +20,16 @@ const TEST_FIXTURES = {
   validCreateData: {
     userId: 'user-456',
     inputIdea: 'Cómo la IA está transformando el trabajo remoto',
-    tone: 'professional',
-    region: 'spain',
+    tone: PostTones.PROFESSIONAL,
+    region: PostRegions.SPAIN,
     variants: [
       'Post variante 1',
       'Post variante 2',
       'Post variante 3',
     ],
   } as CreateGeneratedPostData,
-  tones: ['professional', 'friendly', 'inspirational'] as const,
-  regions: ['spain', 'latam'] as const,
+  tones: [PostTones.PROFESSIONAL, PostTones.FRIENDLY, PostTones.INSPIRATIONAL] as const,
+  regions: [PostRegions.SPAIN, PostRegions.LATAM] as const,
   minIdeaLength: 10,
   maxIdeaLength: 500,
 }
@@ -212,7 +212,7 @@ describe('GeneratedPostFactory', () => {
     it('throws error for invalid tone in create data', () => {
       const data = {
         ...TEST_FIXTURES.validCreateData,
-        tone: 'invalid' as 'professional',
+        tone: 'invalid' as PostTones.PROFESSIONAL,
       }
 
       expect(() => GeneratedPostFactory.validateCreateData(data)).toThrow('Invalid tone')
@@ -221,7 +221,7 @@ describe('GeneratedPostFactory', () => {
     it('throws error for invalid region in create data', () => {
       const data = {
         ...TEST_FIXTURES.validCreateData,
-        region: 'invalid' as 'spain',
+        region: 'invalid' as PostRegions.SPAIN,
       }
 
       expect(() => GeneratedPostFactory.validateCreateData(data)).toThrow('Invalid region')
