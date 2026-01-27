@@ -14,6 +14,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.2",
     "@clerk/localizations": "^3.35.2",
     "@clerk/nextjs": "^6.36.10",
     "@supabase/supabase-js": "^2.93.1",
@@ -21,7 +22,8 @@
     "next": "^16.1.4",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "tailwind-merge": "^2.2.0"
+    "tailwind-merge": "^2.2.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
