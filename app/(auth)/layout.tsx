@@ -1,7 +1,8 @@
-import { auth } from '@clerk/nextjs/server'
+import { currentUser } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 
 import { Header } from '@/shared/components/layout'
+import { syncUserFromAuth } from '@/application'
 
 interface AuthLayoutProps {
   children: React.ReactNode
@@ -10,12 +11,27 @@ interface AuthLayoutProps {
 /**
  * Protected layout for authenticated routes
  * Redirects to login if not authenticated
+ * Syncs user data from Clerk to database on each visit
  */
 export default async function AuthLayout({ children }: AuthLayoutProps) {
-  const { userId } = await auth()
+  const user = await currentUser()
 
-  if (!userId) {
+  if (!user) {
     redirect('/login')
+  }
+
+  // Sync user from Clerk to database
+  // This creates user + subscription if new, updates if existing
+  try {
+    await syncUserFromAuth({
+      externalId: user.id,
+      email: user.emailAddresses[0]?.emailAddress ?? '',
+      name: user.fullName,
+      emailVerified: user.emailAddresses[0]?.verification?.status === 'verified',
+    })
+  } catch (error) {
+    // Log error but don't block user access
+    console.error('Failed to sync user:', error)
   }
 
   return (

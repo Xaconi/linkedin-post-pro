@@ -9,7 +9,8 @@
  */
 
 // Client
-export { supabase, createBrowserClient, createServerClient } from './client'
+export { createBrowserClient, createServerClient } from './client'
+export type { SupabaseClient } from './client'
 
 // Repository implementations (access via Container)
 export { SupabaseUserRepository, SupabaseSubscriptionRepository } from './repositories'
