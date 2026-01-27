@@ -12,3 +12,7 @@ export {
   subscriptionService,
 } from './services'
 export type { SyncUserFromAuthData } from './services'
+
+// Use Cases
+export { syncUserFromAuth } from './use-cases'
+export type { AuthProviderUserData, SyncUserResult } from './use-cases'

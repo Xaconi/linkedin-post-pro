@@ -3,6 +3,7 @@
  *
  * This layer contains:
  * - Entities: Pure TypeScript types representing business objects
+ * - Factories: Create and validate entities with domain rules
  * - Constants: Business rules and configuration (plan limits, etc.)
  * - Repositories: Interfaces for data access (implemented by infrastructure)
  *
@@ -21,6 +22,15 @@ export type {
   SubscriptionPlan,
   SubscriptionStatus,
 } from './entities'
+
+// Factories (create and validate entities)
+export {
+  UserFactory,
+  UserValidationError,
+  SubscriptionFactory,
+  SubscriptionValidationError,
+} from './factories'
+export type { RawUserData, RawSubscriptionData } from './factories'
 
 // Constants
 export {
