@@ -16,5 +16,6 @@ export type {
 
 export {
   PostTones,
-  PostRegions
+  PostRegions,
+  IdeaConstraints,
 } from './generated-post'

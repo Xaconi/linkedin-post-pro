@@ -3,6 +3,14 @@
  * Technology-agnostic, no dependencies on Supabase/Claude/etc.
  */
 
+/**
+ * Business rules for post idea input
+ */
+export const IdeaConstraints = {
+  MIN_LENGTH: 10,
+  MAX_LENGTH: 500,
+} as const
+
 export enum PostTones {
   PROFESSIONAL = 'professional',
   FRIENDLY = 'friendly',

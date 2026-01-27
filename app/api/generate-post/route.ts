@@ -14,7 +14,7 @@ import {
   GeneratePostError,
   GeneratePostErrorCodes,
 } from '@/application/use-cases'
-import { PostTones, PostRegions } from '@/domain/entities/generated-post'
+import { PostTones, PostRegions, IdeaConstraints } from '@/domain/entities/generated-post'
 import type { PostTone, PostRegion } from '@/domain/entities/generated-post'
 
 /**
@@ -23,8 +23,8 @@ import type { PostTone, PostRegion } from '@/domain/entities/generated-post'
 const generatePostSchema = z.object({
   idea: z
     .string()
-    .min(10, 'La idea debe tener al menos 10 caracteres')
-    .max(500, 'La idea no puede superar 500 caracteres'),
+    .min(IdeaConstraints.MIN_LENGTH, `La idea debe tener al menos ${IdeaConstraints.MIN_LENGTH} caracteres`)
+    .max(IdeaConstraints.MAX_LENGTH, `La idea no puede superar ${IdeaConstraints.MAX_LENGTH} caracteres`),
   tone: z.enum([PostTones.PROFESSIONAL, PostTones.FRIENDLY, PostTones.INSPIRATIONAL], {
     error: 'Tono no válido',
   }),
