@@ -1,5 +1,8 @@
 export { SelectorOption } from './SelectorOption'
 
-export { ToneSelector, TONE_OPTIONS } from './ToneSelector'
+export { ToneSelector } from './ToneSelector'
 
-export { RegionSelector, REGION_OPTIONS } from './RegionSelector'
+export { RegionSelector } from './RegionSelector'
+
+// Re-export options from config for convenience
+export { TONE_OPTIONS, REGION_OPTIONS } from '@/config/posts'

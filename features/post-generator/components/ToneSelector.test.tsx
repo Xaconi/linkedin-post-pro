@@ -2,7 +2,8 @@ import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import { ToneSelector, TONE_OPTIONS } from './ToneSelector'
+import { ToneSelector } from './ToneSelector'
+import { TONE_OPTIONS } from '@/config/posts'
 import { PostTones } from '@/domain/entities/generated-post'
 
 describe('ToneSelector', () => {

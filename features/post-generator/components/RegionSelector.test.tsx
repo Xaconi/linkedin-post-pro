@@ -2,7 +2,8 @@ import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import { RegionSelector, REGION_OPTIONS } from './RegionSelector'
+import { RegionSelector } from './RegionSelector'
+import { REGION_OPTIONS } from '@/config/posts'
 import { PostRegions } from '@/domain/entities/generated-post'
 
 describe('RegionSelector', () => {

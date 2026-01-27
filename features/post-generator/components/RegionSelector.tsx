@@ -3,7 +3,7 @@
 import { useId } from 'react'
 
 import { SelectorOption } from './SelectorOption'
-import { PostRegions } from '@/domain/entities/generated-post'
+import { REGION_OPTIONS } from '@/config/posts'
 import type { PostRegion } from '@/domain/entities/generated-post'
 
 interface RegionSelectorProps {
@@ -11,21 +11,6 @@ interface RegionSelectorProps {
   onChange: (value: PostRegion) => void
   disabled?: boolean
 }
-
-const REGION_OPTIONS = [
-  {
-    value: PostRegions.SPAIN,
-    label: 'España',
-    description: 'Español de España',
-    icon: '🇪🇸',
-  },
-  {
-    value: PostRegions.LATAM,
-    label: 'Latinoamérica',
-    description: 'Español latinoamericano',
-    icon: '🌎',
-  },
-] as const
 
 /**
  * Selector for post region (Spain, LATAM)
@@ -63,5 +48,3 @@ export function RegionSelector({
     </fieldset>
   )
 }
-
-export { REGION_OPTIONS }
