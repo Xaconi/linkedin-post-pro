@@ -6,16 +6,13 @@ export {
   TONE_OPTIONS,
   RegionSelector,
   REGION_OPTIONS,
-  PostGeneratorForm, 
+  PostGeneratorForm,
   IdeaTextarea,
-  CopyButton, 
-  PostVariantCard, 
+  CopyButton,
+  PostVariantCard,
   PostVariants,
-  PlanBadge, 
-  PostCounter,
-  CopyButton, 
-  PostVariantCard, 
-  PostVariants
+  PlanBadge,
+  PostCounter
 } from './components'
 
 export type { PostGeneratorFormData } from './components'
