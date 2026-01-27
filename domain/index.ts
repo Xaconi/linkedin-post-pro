@@ -33,8 +33,10 @@ export {
   UserValidationError,
   SubscriptionFactory,
   SubscriptionValidationError,
+  GeneratedPostFactory,
+  GeneratedPostValidationError,
 } from './factories'
-export type { RawUserData, RawSubscriptionData } from './factories'
+export type { RawUserData, RawSubscriptionData, RawGeneratedPostData } from './factories'
 
 // Constants
 export {
