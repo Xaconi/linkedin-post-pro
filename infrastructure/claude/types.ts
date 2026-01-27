@@ -3,8 +3,8 @@
  * Types for post generation parameters and responses
  */
 
-export type PostTone = 'professional' | 'friendly' | 'inspirational'
-export type PostRegion = 'spain' | 'latam'
+import { PostRegion, PostTone } from "@/domain/entities/generated-post"
+
 
 export interface GeneratePostParams {
   idea: string

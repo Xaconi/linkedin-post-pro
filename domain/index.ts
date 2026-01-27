@@ -21,6 +21,15 @@ export type {
   UpdateSubscriptionData,
   SubscriptionPlan,
   SubscriptionStatus,
+  GeneratedPost,
+  CreateGeneratedPostData,
+  PostTone,
+  PostRegion
+} from './entities'
+
+export {
+  PostTones,
+  PostRegions
 } from './entities'
 
 // Factories (create and validate entities)
@@ -29,8 +38,10 @@ export {
   UserValidationError,
   SubscriptionFactory,
   SubscriptionValidationError,
+  GeneratedPostFactory,
+  GeneratedPostValidationError,
 } from './factories'
-export type { RawUserData, RawSubscriptionData } from './factories'
+export type { RawUserData, RawSubscriptionData, RawGeneratedPostData } from './factories'
 
 // Constants
 export {
@@ -45,4 +56,4 @@ export {
 export type { PlanConfig } from './constants'
 
 // Repository Interfaces
-export type { IUserRepository, ISubscriptionRepository } from './repositories'
+export type { IUserRepository, ISubscriptionRepository, IGeneratedPostRepository } from './repositories'

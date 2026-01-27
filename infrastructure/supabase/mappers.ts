@@ -5,12 +5,13 @@
  * and delegate validation/creation to domain factories.
  */
 
-import type { User, Subscription } from '@/domain'
-import { UserFactory, SubscriptionFactory } from '@/domain'
+import type { User, Subscription, GeneratedPost } from '@/domain'
+import { UserFactory, SubscriptionFactory, GeneratedPostFactory } from '@/domain'
 import type { Database } from './types'
 
 type DbUser = Database['public']['Tables']['users']['Row']
 type DbSubscription = Database['public']['Tables']['user_subscriptions']['Row']
+type DbGeneratedPost = Database['public']['Tables']['generated_posts']['Row']
 
 /**
  * Map Supabase user row to domain User entity
@@ -43,5 +44,21 @@ export function mapDbSubscriptionToDomain(dbSub: DbSubscription): Subscription {
     status: dbSub.status,
     createdAt: dbSub.created_at,
     updatedAt: dbSub.updated_at,
+  })
+}
+
+/**
+ * Map Supabase generated post row to domain GeneratedPost entity
+ * Transforms DB structure and delegates to domain factory for validation
+ */
+export function mapDbGeneratedPostToDomain(dbPost: DbGeneratedPost): GeneratedPost {
+  return GeneratedPostFactory.create({
+    id: dbPost.id,
+    userId: dbPost.user_id,
+    inputIdea: dbPost.input_idea,
+    tone: dbPost.tone,
+    region: dbPost.region,
+    variants: [dbPost.variant_1, dbPost.variant_2, dbPost.variant_3],
+    createdAt: dbPost.created_at,
   })
 }

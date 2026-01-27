@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { generatePost, isClaudeApiError } from './client'
 import type { GeneratePostParams, ClaudeApiError } from './types'
+import { PostRegions, PostTones } from '@/domain'
 
 const mockCreate = vi.fn()
 
@@ -51,8 +52,8 @@ vi.mock('@anthropic-ai/sdk', () => {
 const TEST_FIXTURES = {
   params: {
     idea: 'Cómo la inteligencia artificial está transformando el trabajo remoto',
-    tone: 'professional',
-    region: 'spain',
+    tone: PostTones.PROFESSIONAL,
+    region: PostRegions.SPAIN,
   } as GeneratePostParams,
   validResponse: {
     variants: [
