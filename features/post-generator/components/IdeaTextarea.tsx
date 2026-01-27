@@ -2,8 +2,10 @@
 
 import { useId } from 'react'
 
-const MIN_CHARACTERS = 10
-const MAX_CHARACTERS = 500
+import { IdeaConstraints } from '@/domain/entities/generated-post'
+
+const MIN_CHARACTERS = IdeaConstraints.MIN_LENGTH
+const MAX_CHARACTERS = IdeaConstraints.MAX_LENGTH
 
 interface IdeaTextareaProps {
   value: string
@@ -90,5 +92,3 @@ export function IdeaTextarea({
     </div>
   )
 }
-
-export { MIN_CHARACTERS, MAX_CHARACTERS }

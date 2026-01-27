@@ -3,7 +3,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { PostGeneratorForm } from './PostGeneratorForm'
-import { MIN_CHARACTERS } from './IdeaTextarea'
+import { IdeaConstraints } from '@/domain/entities/generated-post'
 
 describe('PostGeneratorForm', () => {
   const mockOnSubmit = vi.fn()
@@ -25,7 +25,7 @@ describe('PostGeneratorForm', () => {
     it('renders character counter', () => {
       render(<PostGeneratorForm onSubmit={mockOnSubmit} />)
 
-      expect(screen.getByText('0/500')).toBeInTheDocument()
+      expect(screen.getByText(`0/${IdeaConstraints.MAX_LENGTH}`)).toBeInTheDocument()
     })
 
     it('renders label for textarea', () => {
@@ -72,7 +72,7 @@ describe('PostGeneratorForm', () => {
       const textarea = screen.getByRole('textbox')
       await user.type(textarea, 'Short')
 
-      expect(screen.getByText(`Mínimo ${MIN_CHARACTERS} caracteres`)).toBeInTheDocument()
+      expect(screen.getByText(`Mínimo ${IdeaConstraints.MIN_LENGTH} caracteres`)).toBeInTheDocument()
     })
 
     it('updates character counter as user types', async () => {
@@ -82,7 +82,7 @@ describe('PostGeneratorForm', () => {
       const textarea = screen.getByRole('textbox')
       await user.type(textarea, 'Hello')
 
-      expect(screen.getByText('5/500')).toBeInTheDocument()
+      expect(screen.getByText(`5/${IdeaConstraints.MAX_LENGTH}`)).toBeInTheDocument()
     })
   })
 
@@ -214,7 +214,7 @@ describe('PostGeneratorForm', () => {
       const textarea = screen.getByRole('textbox')
       await user.type(textarea, 'Test')
 
-      const counter = screen.getByText('4/500')
+      const counter = screen.getByText(`4/${IdeaConstraints.MAX_LENGTH}`)
       expect(counter).toHaveAttribute('aria-live', 'polite')
     })
   })
