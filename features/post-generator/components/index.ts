@@ -4,5 +4,8 @@ export { ToneSelector } from './ToneSelector'
 
 export { RegionSelector } from './RegionSelector'
 
-// Re-export options from config for convenience
 export { TONE_OPTIONS, REGION_OPTIONS } from '@/config/posts'
+export { PostGeneratorForm } from './PostGeneratorForm'
+export type { PostGeneratorFormData } from './PostGeneratorForm'
+
+export { IdeaTextarea } from './IdeaTextarea'

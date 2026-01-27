@@ -1,8 +1,8 @@
-import { PostRegions, PostTones } from "@/domain"
+import { PostRegions, PostTones, IdeaConstraints } from "@/domain"
 
 export const POST_LIMITS = {
-  MAX_IDEA_LENGTH: 500,
-  MIN_IDEA_LENGTH: 10,
+  MAX_IDEA_LENGTH: IdeaConstraints.MAX_LENGTH,
+  MIN_IDEA_LENGTH: IdeaConstraints.MIN_LENGTH,
   VARIANTS_COUNT: 3,
   RATE_LIMIT_SECONDS: 10,
   MAX_TOKENS: 1500,
