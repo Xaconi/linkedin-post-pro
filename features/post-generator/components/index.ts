@@ -1,3 +1,6 @@
+export { PlanBadge } from './PlanBadge'
+
+export { PostCounter } from './PostCounter'
 export { CopyButton } from './CopyButton'
 
 export { PostVariantCard } from './PostVariantCard'
