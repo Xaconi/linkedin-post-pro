@@ -1,13 +1,14 @@
-export type PlanType = 'free' | 'pro'
+/**
+ * User Types - Re-export from Domain Layer
+ *
+ * For backward compatibility. Prefer importing from @/domain directly.
+ */
 
-export type SubscriptionStatus = 'active' | 'cancelled'
+export type {
+  SubscriptionPlan,
+  SubscriptionStatus,
+  Subscription as UserSubscription,
+} from '@/domain'
 
-export interface UserSubscription {
-  id: string
-  userId: string
-  plan: PlanType
-  postsRemaining: number
-  postsLimit: number
-  cycleStartDate: Date
-  status: SubscriptionStatus
-}
+// Alias for backward compatibility
+export type { SubscriptionPlan as PlanType } from '@/domain'
