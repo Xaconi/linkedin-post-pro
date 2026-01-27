@@ -1,8 +1,11 @@
 import { describe, it, expect } from 'vitest'
 import { UserFactory, UserValidationError } from './user-factory'
 
-describe('UserFactory', () => {
-  const validUserData = {
+/**
+ * Test fixtures - centralized test data to avoid magic strings
+ */
+const TEST_FIXTURES = {
+  validUser: {
     id: '123e4567-e89b-12d3-a456-426614174000',
     externalId: 'clerk_123',
     email: 'test@example.com',
@@ -10,33 +13,52 @@ describe('UserFactory', () => {
     emailVerified: true,
     createdAt: '2024-01-01T00:00:00Z',
     updatedAt: '2024-01-01T00:00:00Z',
-  }
+  },
+  emails: {
+    valid: 'test@example.com',
+    uppercase: 'TEST@EXAMPLE.COM',
+    invalid: 'invalid-email',
+  },
+  dates: {
+    isoString: '2024-01-01T00:00:00.000Z',
+    alternativeDate: new Date('2024-06-15T12:00:00Z'),
+  },
+}
 
+const ERROR_MESSAGES = {
+  userIdRequired: 'User ID is required',
+  externalIdRequired: 'External ID is required',
+  emailRequired: 'Email is required',
+  invalidEmailFormat: 'Invalid email format',
+  emailVerifiedRequired: 'Email verified status is required',
+}
+
+describe('UserFactory', () => {
   describe('create', () => {
     it('creates a valid user entity', () => {
-      const user = UserFactory.create(validUserData)
+      const user = UserFactory.create(TEST_FIXTURES.validUser)
 
-      expect(user.id).toBe(validUserData.id)
-      expect(user.externalId).toBe(validUserData.externalId)
-      expect(user.email).toBe('test@example.com')
-      expect(user.name).toBe('Test User')
-      expect(user.emailVerified).toBe(true)
+      expect(user.id).toBe(TEST_FIXTURES.validUser.id)
+      expect(user.externalId).toBe(TEST_FIXTURES.validUser.externalId)
+      expect(user.email).toBe(TEST_FIXTURES.emails.valid)
+      expect(user.name).toBe(TEST_FIXTURES.validUser.name)
+      expect(user.emailVerified).toBe(TEST_FIXTURES.validUser.emailVerified)
       expect(user.createdAt).toBeInstanceOf(Date)
       expect(user.updatedAt).toBeInstanceOf(Date)
     })
 
     it('normalizes email to lowercase', () => {
       const user = UserFactory.create({
-        ...validUserData,
-        email: 'TEST@EXAMPLE.COM',
+        ...TEST_FIXTURES.validUser,
+        email: TEST_FIXTURES.emails.uppercase,
       })
 
-      expect(user.email).toBe('test@example.com')
+      expect(user.email).toBe(TEST_FIXTURES.emails.valid)
     })
 
     it('handles null name', () => {
       const user = UserFactory.create({
-        ...validUserData,
+        ...TEST_FIXTURES.validUser,
         name: null,
       })
 
@@ -44,16 +66,16 @@ describe('UserFactory', () => {
     })
 
     it('converts string dates to Date objects', () => {
-      const user = UserFactory.create(validUserData)
+      const user = UserFactory.create(TEST_FIXTURES.validUser)
 
       expect(user.createdAt).toBeInstanceOf(Date)
-      expect(user.createdAt.toISOString()).toBe('2024-01-01T00:00:00.000Z')
+      expect(user.createdAt.toISOString()).toBe(TEST_FIXTURES.dates.isoString)
     })
 
     it('accepts Date objects directly', () => {
-      const date = new Date('2024-06-15T12:00:00Z')
+      const date = TEST_FIXTURES.dates.alternativeDate
       const user = UserFactory.create({
-        ...validUserData,
+        ...TEST_FIXTURES.validUser,
         createdAt: date,
         updatedAt: date,
       })
@@ -66,58 +88,64 @@ describe('UserFactory', () => {
   describe('validate', () => {
     it('throws error for missing id', () => {
       expect(() =>
-        UserFactory.validate({ ...validUserData, id: '' })
+        UserFactory.validate({ ...TEST_FIXTURES.validUser, id: '' })
       ).toThrow(UserValidationError)
       expect(() =>
-        UserFactory.validate({ ...validUserData, id: '' })
-      ).toThrow('User ID is required')
+        UserFactory.validate({ ...TEST_FIXTURES.validUser, id: '' })
+      ).toThrow(ERROR_MESSAGES.userIdRequired)
     })
 
     it('throws error for missing externalId', () => {
       expect(() =>
-        UserFactory.validate({ ...validUserData, externalId: '' })
+        UserFactory.validate({ ...TEST_FIXTURES.validUser, externalId: '' })
       ).toThrow(UserValidationError)
       expect(() =>
-        UserFactory.validate({ ...validUserData, externalId: '' })
-      ).toThrow('External ID is required')
+        UserFactory.validate({ ...TEST_FIXTURES.validUser, externalId: '' })
+      ).toThrow(ERROR_MESSAGES.externalIdRequired)
     })
 
     it('throws error for missing email', () => {
       expect(() =>
-        UserFactory.validate({ ...validUserData, email: '' })
+        UserFactory.validate({ ...TEST_FIXTURES.validUser, email: '' })
       ).toThrow(UserValidationError)
       expect(() =>
-        UserFactory.validate({ ...validUserData, email: '' })
-      ).toThrow('Email is required')
+        UserFactory.validate({ ...TEST_FIXTURES.validUser, email: '' })
+      ).toThrow(ERROR_MESSAGES.emailRequired)
     })
 
     it('throws error for invalid email format', () => {
       expect(() =>
-        UserFactory.validate({ ...validUserData, email: 'invalid-email' })
+        UserFactory.validate({ ...TEST_FIXTURES.validUser, email: TEST_FIXTURES.emails.invalid })
       ).toThrow(UserValidationError)
       expect(() =>
-        UserFactory.validate({ ...validUserData, email: 'invalid-email' })
-      ).toThrow('Invalid email format')
+        UserFactory.validate({ ...TEST_FIXTURES.validUser, email: TEST_FIXTURES.emails.invalid })
+      ).toThrow(ERROR_MESSAGES.invalidEmailFormat)
     })
 
     it('throws error for missing emailVerified', () => {
       expect(() =>
-        UserFactory.validate({ ...validUserData, emailVerified: undefined as unknown as boolean })
+        UserFactory.validate({
+          ...TEST_FIXTURES.validUser,
+          emailVerified: undefined as unknown as boolean,
+        })
       ).toThrow(UserValidationError)
       expect(() =>
-        UserFactory.validate({ ...validUserData, emailVerified: undefined as unknown as boolean })
-      ).toThrow('Email verified status is required')
+        UserFactory.validate({
+          ...TEST_FIXTURES.validUser,
+          emailVerified: undefined as unknown as boolean,
+        })
+      ).toThrow(ERROR_MESSAGES.emailVerifiedRequired)
     })
 
     it('accepts valid data without throwing', () => {
-      expect(() => UserFactory.validate(validUserData)).not.toThrow()
+      expect(() => UserFactory.validate(TEST_FIXTURES.validUser)).not.toThrow()
     })
   })
 
   describe('validateCreateData', () => {
     const validCreateData = {
-      externalId: 'clerk_123',
-      email: 'test@example.com',
+      externalId: TEST_FIXTURES.validUser.externalId,
+      email: TEST_FIXTURES.emails.valid,
     }
 
     it('validates correct create data', () => {
@@ -127,13 +155,13 @@ describe('UserFactory', () => {
     it('throws error for missing externalId', () => {
       expect(() =>
         UserFactory.validateCreateData({ ...validCreateData, externalId: '' })
-      ).toThrow('External ID is required')
+      ).toThrow(ERROR_MESSAGES.externalIdRequired)
     })
 
     it('throws error for invalid email', () => {
       expect(() =>
-        UserFactory.validateCreateData({ ...validCreateData, email: 'bad-email' })
-      ).toThrow('Invalid email format')
+        UserFactory.validateCreateData({ ...validCreateData, email: TEST_FIXTURES.emails.invalid })
+      ).toThrow(ERROR_MESSAGES.invalidEmailFormat)
     })
   })
 })
