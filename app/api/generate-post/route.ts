@@ -16,6 +16,7 @@ import {
 } from '@/application/use-cases'
 import { PostTones, PostRegions } from '@/domain/entities/generated-post'
 import type { PostTone, PostRegion } from '@/domain/entities/generated-post'
+import { rateLimit } from '@/lib/ratelimit'
 
 /**
  * Input validation schema
@@ -68,7 +69,18 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return errorResponse('No autenticado', 401, 'UNAUTHORIZED')
     }
 
-    // 2. Parse and validate input (infrastructure concern - HTTP specific)
+    // 2. Check rate limit (1 request per 10 seconds)
+    const rateLimitResult = rateLimit(clerkUserId)
+
+    if (!rateLimitResult.allowed) {
+      return errorResponse(
+        `Espera ${rateLimitResult.remainingSeconds} segundos antes de generar otro post`,
+        429,
+        'RATE_LIMITED'
+      )
+    }
+
+    // 3. Parse and validate input (infrastructure concern - HTTP specific)
     let input: GeneratePostInput
 
     try {
@@ -82,7 +94,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return errorResponse('Cuerpo de la petición inválido', 400, 'INVALID_BODY')
     }
 
-    // 3. Execute use case (business logic)
+    // 4. Execute use case (business logic)
     const result = await generatePostUseCase({
       externalUserId: clerkUserId,
       idea: input.idea,
@@ -90,7 +102,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       region: input.region as PostRegion,
     })
 
-    // 4. Return success response
+    // 5. Return success response
     return NextResponse.json({
       variants: result.post.variants,
       postsRemaining: result.postsRemaining,
