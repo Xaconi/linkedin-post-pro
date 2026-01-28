@@ -93,12 +93,12 @@ export function Modal({
       <div
         ref={modalRef}
         tabIndex={-1}
-        className={`relative w-full ${sizeClasses[size]} animate-fade-in-up rounded-2xl bg-white p-6 shadow-2xl focus:outline-none`}
+        className={`relative w-full ${sizeClasses[size]} max-h-[90vh] animate-fade-in-up overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl focus:outline-none`}
       >
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-neutral-medium transition-colors hover:bg-neutral-light hover:text-neutral-dark"
+          className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full text-neutral-medium transition-colors hover:bg-neutral-light hover:text-neutral-dark active:scale-95"
           aria-label="Cerrar"
         >
           <svg
