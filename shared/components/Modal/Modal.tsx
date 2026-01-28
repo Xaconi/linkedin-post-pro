@@ -1,6 +1,8 @@
 'use client'
 
-import { useCallback, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
+
+import { CloseIcon } from '../icons'
 
 interface ModalProps {
   isOpen: boolean
@@ -26,6 +28,10 @@ export function Modal({
 }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null)
   const previousFocusRef = useRef<HTMLElement | null>(null)
+  const onCloseRef = useRef(onClose)
+
+  // Keep onClose ref updated
+  onCloseRef.current = onClose
 
   const sizeClasses = {
     sm: 'max-w-sm',
@@ -33,37 +39,30 @@ export function Modal({
     lg: 'max-w-lg',
   }
 
-  // Handle escape key
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose()
-      }
-    },
-    [onClose]
-  )
-
-  // Focus management and body scroll lock
+  // Focus management and body scroll lock (only when isOpen changes)
   useEffect(() => {
-    if (isOpen) {
-      // Store previous focus
-      previousFocusRef.current = document.activeElement as HTMLElement
+    if (!isOpen) return
 
-      // Focus modal
-      modalRef.current?.focus()
+    // Store previous focus
+    previousFocusRef.current = document.activeElement as HTMLElement
 
-      // Lock body scroll
-      document.body.style.overflow = 'hidden'
+    // Focus modal
+    modalRef.current?.focus()
 
-      // Add escape listener
-      document.addEventListener('keydown', handleKeyDown)
+    // Lock body scroll
+    document.body.style.overflow = 'hidden'
+
+    // Handle escape key
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onCloseRef.current()
+      }
     }
 
-    return () => {
-      // Restore body scroll
-      document.body.style.overflow = ''
+    document.addEventListener('keydown', handleKeyDown)
 
-      // Remove escape listener
+    return () => {
+      document.body.style.overflow = ''
       document.removeEventListener('keydown', handleKeyDown)
 
       // Restore previous focus
@@ -71,7 +70,7 @@ export function Modal({
         previousFocusRef.current.focus()
       }
     }
-  }, [isOpen, handleKeyDown])
+  }, [isOpen])
 
   if (!isOpen) return null
 
@@ -93,24 +92,15 @@ export function Modal({
       <div
         ref={modalRef}
         tabIndex={-1}
-        className={`relative w-full ${sizeClasses[size]} animate-fade-in-up rounded-2xl bg-white p-6 shadow-2xl focus:outline-none`}
+        className={`relative w-full ${sizeClasses[size]} max-h-[90vh] animate-fade-in-up overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl focus:outline-none`}
       >
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-neutral-medium transition-colors hover:bg-neutral-light hover:text-neutral-dark"
+          className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full text-neutral-medium transition-colors hover:bg-neutral-light hover:text-neutral-dark active:scale-95"
           aria-label="Cerrar"
         >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M5 5l10 10M15 5L5 15" />
-          </svg>
+          <CloseIcon className="h-5 w-5" />
         </button>
 
         {/* Title */}

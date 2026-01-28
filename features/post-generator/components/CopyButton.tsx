@@ -31,11 +31,11 @@ export function CopyButton({ text, className = '' }: CopyButtonProps) {
       onClick={handleCopy}
       aria-label={copied ? 'Copiado' : 'Copiar al portapapeles'}
       className={`
-        inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium
+        inline-flex items-center justify-center gap-1.5 px-4 py-2.5 min-h-[44px] rounded-lg text-sm font-medium
         transition-all duration-200
         ${copied
           ? 'bg-secondary/10 text-secondary'
-          : 'bg-neutral-light hover:bg-neutral-light/80 text-neutral-dark'
+          : 'bg-neutral-light hover:bg-neutral-light/80 text-neutral-dark active:scale-95'
         }
         ${className}
       `}

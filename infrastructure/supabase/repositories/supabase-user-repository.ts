@@ -94,6 +94,8 @@ export class SupabaseUserRepository implements IUserRepository {
         ...(updates.email !== undefined && { email: updates.email }),
         ...(updates.name !== undefined && { name: updates.name }),
         ...(updates.emailVerified !== undefined && { email_verified: updates.emailVerified }),
+        ...(updates.emailTips !== undefined && { email_tips: updates.emailTips }),
+        ...(updates.emailUpdates !== undefined && { email_updates: updates.emailUpdates }),
         updated_at: new Date().toISOString(),
       })
       .eq('id', id)

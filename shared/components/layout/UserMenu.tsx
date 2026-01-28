@@ -4,7 +4,9 @@ import { useClerk, useUser } from '@clerk/nextjs'
 import Image from 'next/image'
 import { useState, useRef, useEffect } from 'react'
 
-import { ChevronDownIcon, LogoutIcon } from '@/shared/components/icons'
+import Link from 'next/link'
+
+import { ChevronDownIcon, LogoutIcon, SettingsIcon } from '@/shared/components/icons'
 
 /**
  * User dropdown menu with avatar and logout
@@ -53,7 +55,7 @@ export function UserMenu() {
       {/* Trigger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-neutral-light transition-colors"
+        className="flex items-center gap-2 p-2 rounded-lg hover:bg-neutral-light transition-colors min-h-[44px]"
         aria-expanded={isOpen}
         aria-haspopup="true"
         aria-label={`Menú de usuario para ${userName}`}
@@ -96,13 +98,22 @@ export function UserMenu() {
 
           {/* Menu Items */}
           <div className="py-1">
+            <Link
+              href="/app/settings"
+              className="w-full px-4 py-3 text-left text-sm text-neutral-dark hover:bg-neutral-light transition-colors flex items-center gap-3 min-h-[44px]"
+              role="menuitem"
+              onClick={() => setIsOpen(false)}
+            >
+              <SettingsIcon className="w-5 h-5 text-neutral-medium" />
+              Ajustes
+            </Link>
             <button
               onClick={handleSignOut}
-              className="w-full px-4 py-2 text-left text-sm text-neutral-dark hover:bg-neutral-light transition-colors flex items-center gap-2"
+              className="w-full px-4 py-3 text-left text-sm text-neutral-dark hover:bg-neutral-light transition-colors flex items-center gap-3 min-h-[44px]"
               role="menuitem"
             >
-              <LogoutIcon className="w-4 h-4 text-neutral-medium" />
-              Cerrar sesión
+              <LogoutIcon className="w-5 h-5 text-neutral-medium" />
+              Cerrar sesion
             </button>
           </div>
         </div>

@@ -8,7 +8,7 @@ import { PostVariants } from './PostVariants'
 import { ToneSelector } from './ToneSelector'
 import { RegionSelector } from './RegionSelector'
 import { IdeaTextarea } from './IdeaTextarea'
-import { LoadingSpinner } from '@/components/shared'
+import { LoadingSpinner } from '@/shared'
 import { ErrorAlert } from '@/shared/components'
 import { IdeaConstraints } from '@/domain/entities/generated-post'
 import { WaitlistModal } from '@features/pricing'
@@ -117,10 +117,9 @@ export function PostGeneratorDashboard({
               transition-all duration-200
               focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2
               disabled:cursor-not-allowed
-              ${
-                canSubmit
-                  ? 'bg-primary hover:bg-primary-hover active:scale-[0.98]'
-                  : 'bg-neutral-medium/50'
+              ${canSubmit
+                ? 'bg-primary hover:bg-primary-hover active:scale-[0.98]'
+                : 'bg-neutral-medium/50'
               }
             `}
           >
