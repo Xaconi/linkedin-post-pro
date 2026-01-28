@@ -1,3 +1,5 @@
 export { AccountInfo } from './AccountInfo'
+export { DangerZone } from './DangerZone'
+export { DeleteAccountModal } from './DeleteAccountModal'
 export { EmailPreferences } from './EmailPreferences'
 export { SettingsSection } from './SettingsSection'

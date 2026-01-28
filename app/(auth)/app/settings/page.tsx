@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 
 import { userService } from '@/application/services'
 import { subscriptionService } from '@/application/services'
-import { AccountInfo, EmailPreferences } from '@/features/settings'
+import { AccountInfo, DangerZone, EmailPreferences } from '@/features/settings'
 import { Header } from '@/shared/components/layout'
 
 export const metadata = {
@@ -62,6 +62,8 @@ export default async function SettingsPage() {
               emailUpdates: user.emailUpdates,
             }}
           />
+
+          <DangerZone />
         </div>
       </main>
     </div>
