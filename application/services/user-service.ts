@@ -65,6 +65,26 @@ export class UserService {
     const userRepo = Container.getUserRepository()
     return userRepo.update(userId, { emailVerified: verified })
   }
+
+  /**
+   * Update user email preferences
+   */
+  async updateEmailPreferences(
+    userId: string,
+    preferences: { emailTips?: boolean; emailUpdates?: boolean }
+  ): Promise<User> {
+    const userRepo = Container.getUserRepository()
+    return userRepo.update(userId, preferences)
+  }
+
+  /**
+   * Delete user account
+   * Note: Related data (subscriptions, posts) are deleted via CASCADE in database
+   */
+  async deleteAccount(userId: string): Promise<void> {
+    const userRepo = Container.getUserRepository()
+    await userRepo.delete(userId)
+  }
 }
 
 export const userService = new UserService()

@@ -8,7 +8,6 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { auth } from '@clerk/nextjs/server'
 
 import { userService } from '@/application/services'
-import { Container } from '@/application/container'
 
 /**
  * Error response helper
@@ -53,9 +52,8 @@ export async function PATCH(request: NextRequest): Promise<NextResponse> {
       )
     }
 
-    // 5. Update user preferences
-    const userRepo = Container.getUserRepository()
-    await userRepo.update(user.id, {
+    // 5. Update user preferences via service
+    await userService.updateEmailPreferences(user.id, {
       ...(typeof emailTips === 'boolean' && { emailTips }),
       ...(typeof emailUpdates === 'boolean' && { emailUpdates }),
     })

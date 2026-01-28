@@ -8,7 +8,6 @@ import { NextResponse } from 'next/server'
 import { auth, clerkClient } from '@clerk/nextjs/server'
 
 import { userService } from '@/application/services'
-import { Container } from '@/application/container'
 
 /**
  * Error response helper
@@ -40,9 +39,8 @@ export async function DELETE(): Promise<NextResponse> {
       return errorResponse('Usuario no encontrado', 404, 'USER_NOT_FOUND')
     }
 
-    // 3. Delete from Supabase (cascades to subscriptions and posts)
-    const userRepo = Container.getUserRepository()
-    await userRepo.delete(user.id)
+    // 3. Delete from Supabase via service (cascades to subscriptions and posts)
+    await userService.deleteAccount(user.id)
 
     // 4. Delete from Clerk
     try {
