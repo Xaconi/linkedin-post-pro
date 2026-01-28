@@ -46,6 +46,8 @@ export class MockUserRepository implements IUserRepository {
       emailVerified: data.emailVerified ?? false,
       createdAt: now,
       updatedAt: now,
+      emailTips: true,
+      emailUpdates: true,
     }
     this.users.set(id, user)
     this.externalIdIndex.set(data.externalId, id)
