@@ -33,17 +33,44 @@ export function PricingCard({
   badge,
   onCtaClick,
 }: PricingCardProps) {
-  const ButtonOrLink = ctaLink ? Link : 'button'
-  const buttonProps = ctaLink
-    ? { href: ctaLink }
-    : { onClick: onCtaClick, disabled: !onCtaClick }
+  const ctaClassName = `mb-8 flex w-full items-center justify-center gap-2 rounded-xl py-4 text-center font-semibold transition-all duration-200 ${
+    highlighted
+      ? 'bg-primary text-white hover:bg-primary-hover hover:shadow-lg hover:shadow-primary/25 active:scale-[0.98]'
+      : onCtaClick || ctaLink
+        ? 'border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-white active:scale-[0.98]'
+        : 'cursor-not-allowed border-2 border-neutral-light bg-neutral-light/50 text-neutral-medium'
+  }`
+
+  const ctaContent = (
+    <>
+      {cta}
+      {(onCtaClick || ctaLink) && (
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          className="transition-transform group-hover:translate-x-0.5"
+        >
+          <path
+            d="M6 12L10 8L6 4"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      )}
+    </>
+  )
 
   return (
     <div
-      className={`group relative flex flex-col overflow-hidden rounded-2xl transition-all duration-300 ${highlighted
+      className={`group relative flex flex-col overflow-hidden rounded-2xl transition-all duration-300 ${
+        highlighted
           ? 'border-2 border-primary bg-white shadow-xl shadow-primary/10 hover:shadow-2xl hover:shadow-primary/15'
           : 'border border-neutral-light bg-white shadow-sm hover:border-neutral-light/80 hover:shadow-lg'
-        }`}
+      }`}
     >
       {/* Highlighted card accent */}
       {highlighted && (
@@ -62,10 +89,11 @@ export function PricingCard({
         <div className="mb-8">
           <div className="mb-4 flex items-center gap-3">
             <span
-              className={`inline-flex h-10 w-10 items-center justify-center rounded-xl text-lg font-bold ${highlighted
+              className={`inline-flex h-10 w-10 items-center justify-center rounded-xl text-lg font-bold ${
+                highlighted
                   ? 'bg-primary text-white'
                   : 'bg-neutral-light text-neutral-dark'
-                }`}
+              }`}
             >
               {name[0]}
             </span>
@@ -90,34 +118,19 @@ export function PricingCard({
         </div>
 
         {/* CTA - full width with micro-interaction */}
-        <ButtonOrLink
-          {...(buttonProps as React.ComponentProps<typeof ButtonOrLink>)}
-          className={`mb-8 flex w-full items-center justify-center gap-2 rounded-xl py-4 text-center font-semibold transition-all duration-200 ${highlighted
-              ? 'bg-primary text-white hover:bg-primary-hover hover:shadow-lg hover:shadow-primary/25 active:scale-[0.98]'
-              : onCtaClick || ctaLink
-                ? 'border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-white active:scale-[0.98]'
-                : 'cursor-not-allowed border-2 border-neutral-light bg-neutral-light/50 text-neutral-medium'
-            }`}
-        >
-          {cta}
-          {(onCtaClick || ctaLink) && (
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              className="transition-transform group-hover:translate-x-0.5"
-            >
-              <path
-                d="M6 12L10 8L6 4"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          )}
-        </ButtonOrLink>
+        {ctaLink ? (
+          <Link href={ctaLink} className={ctaClassName}>
+            {ctaContent}
+          </Link>
+        ) : onCtaClick ? (
+          <button onClick={onCtaClick} className={ctaClassName}>
+            {ctaContent}
+          </button>
+        ) : (
+          <button disabled className={ctaClassName}>
+            {ctaContent}
+          </button>
+        )}
 
         {/* Features - with subtle divider */}
         <div className="mt-auto">
