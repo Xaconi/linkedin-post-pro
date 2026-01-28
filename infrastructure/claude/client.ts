@@ -31,11 +31,21 @@ function createClient(): Anthropic {
   })
 }
 
+function extractJson(content: string): string {
+  // Remove markdown code blocks if present
+  const codeBlockMatch = content.match(/```(?:json)?\s*([\s\S]*?)```/)
+  if (codeBlockMatch) {
+    return codeBlockMatch[1].trim()
+  }
+  return content.trim()
+}
+
 function parseResponse(content: string): GeneratePostResult {
   let parsed: unknown
+  const jsonContent = extractJson(content)
 
   try {
-    parsed = JSON.parse(content)
+    parsed = JSON.parse(jsonContent)
   } catch (error) {
     throw createClaudeError(
       'INVALID_RESPONSE',
