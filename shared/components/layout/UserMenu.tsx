@@ -4,7 +4,9 @@ import { useClerk, useUser } from '@clerk/nextjs'
 import Image from 'next/image'
 import { useState, useRef, useEffect } from 'react'
 
-import { ChevronDownIcon, LogoutIcon } from '@/shared/components/icons'
+import Link from 'next/link'
+
+import { ChevronDownIcon, LogoutIcon, SettingsIcon } from '@/shared/components/icons'
 
 /**
  * User dropdown menu with avatar and logout
@@ -96,13 +98,22 @@ export function UserMenu() {
 
           {/* Menu Items */}
           <div className="py-1">
+            <Link
+              href="/app/settings"
+              className="w-full px-4 py-2 text-left text-sm text-neutral-dark hover:bg-neutral-light transition-colors flex items-center gap-2"
+              role="menuitem"
+              onClick={() => setIsOpen(false)}
+            >
+              <SettingsIcon className="w-4 h-4 text-neutral-medium" />
+              Ajustes
+            </Link>
             <button
               onClick={handleSignOut}
               className="w-full px-4 py-2 text-left text-sm text-neutral-dark hover:bg-neutral-light transition-colors flex items-center gap-2"
               role="menuitem"
             >
               <LogoutIcon className="w-4 h-4 text-neutral-medium" />
-              Cerrar sesión
+              Cerrar sesion
             </button>
           </div>
         </div>
