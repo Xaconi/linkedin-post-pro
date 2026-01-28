@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 import { CloseIcon } from '../icons'
 
@@ -28,6 +28,10 @@ export function Modal({
 }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null)
   const previousFocusRef = useRef<HTMLElement | null>(null)
+  const onCloseRef = useRef(onClose)
+
+  // Keep onClose ref updated
+  onCloseRef.current = onClose
 
   const sizeClasses = {
     sm: 'max-w-sm',
@@ -35,37 +39,30 @@ export function Modal({
     lg: 'max-w-lg',
   }
 
-  // Handle escape key
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose()
-      }
-    },
-    [onClose]
-  )
-
-  // Focus management and body scroll lock
+  // Focus management and body scroll lock (only when isOpen changes)
   useEffect(() => {
-    if (isOpen) {
-      // Store previous focus
-      previousFocusRef.current = document.activeElement as HTMLElement
+    if (!isOpen) return
 
-      // Focus modal
-      modalRef.current?.focus()
+    // Store previous focus
+    previousFocusRef.current = document.activeElement as HTMLElement
 
-      // Lock body scroll
-      document.body.style.overflow = 'hidden'
+    // Focus modal
+    modalRef.current?.focus()
 
-      // Add escape listener
-      document.addEventListener('keydown', handleKeyDown)
+    // Lock body scroll
+    document.body.style.overflow = 'hidden'
+
+    // Handle escape key
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onCloseRef.current()
+      }
     }
 
-    return () => {
-      // Restore body scroll
-      document.body.style.overflow = ''
+    document.addEventListener('keydown', handleKeyDown)
 
-      // Remove escape listener
+    return () => {
+      document.body.style.overflow = ''
       document.removeEventListener('keydown', handleKeyDown)
 
       // Restore previous focus
@@ -73,7 +70,7 @@ export function Modal({
         previousFocusRef.current.focus()
       }
     }
-  }, [isOpen, handleKeyDown])
+  }, [isOpen])
 
   if (!isOpen) return null
 
