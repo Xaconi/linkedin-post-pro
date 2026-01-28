@@ -3,6 +3,8 @@
  * Handles user operations without knowing about Supabase
  */
 
+import { clerkClient } from '@clerk/nextjs/server'
+
 import { Container } from '../container'
 import type { User } from '@/domain/entities/user'
 
@@ -78,12 +80,29 @@ export class UserService {
   }
 
   /**
-   * Delete user account
+   * Delete user account from database and auth provider
    * Note: Related data (subscriptions, posts) are deleted via CASCADE in database
    */
-  async deleteAccount(userId: string): Promise<void> {
+  async deleteAccount(externalId: string): Promise<void> {
     const userRepo = Container.getUserRepository()
-    await userRepo.delete(userId)
+
+    // 1. Get user from database
+    const user = await userRepo.findByExternalId(externalId)
+    if (!user) {
+      throw new Error('Usuario no encontrado')
+    }
+
+    // 2. Delete from database (cascades to subscriptions and posts)
+    await userRepo.delete(user.id)
+
+    // 3. Delete from Clerk
+    try {
+      const clerk = await clerkClient()
+      await clerk.users.deleteUser(externalId)
+    } catch (clerkError) {
+      // Log but don't fail - user is already deleted from our DB
+      console.error('Error deleting user from Clerk:', clerkError)
+    }
   }
 }
 
