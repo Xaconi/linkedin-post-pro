@@ -4,7 +4,6 @@ import { redirect } from 'next/navigation'
 import { userService } from '@/application/services'
 import { subscriptionService } from '@/application/services'
 import { AccountInfo, DangerZone, EmailPreferences } from '@/features/settings'
-import { Header } from '@/shared/components/layout'
 
 export const metadata = {
   title: 'Ajustes | LinkedIn Post Pro',
