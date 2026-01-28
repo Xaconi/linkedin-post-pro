@@ -1,4 +1,4 @@
-export { useSubscription } from './hooks'
+export { useSubscription, usePostGenerator } from './hooks'
 
 export {
   SelectorOption,
@@ -12,7 +12,8 @@ export {
   PostVariantCard,
   PostVariants,
   PlanBadge,
-  PostCounter
+  PostCounter,
+  PostGeneratorDashboard,
 } from './components'
 
 export type { PostGeneratorFormData } from './components'

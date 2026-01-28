@@ -11,6 +11,7 @@ import type {
   GeneratePostResult,
   ClaudeApiError,
 } from './types'
+import { extractJson } from '@/shared/functions/json'
 
 const CLAUDE_MODEL = 'claude-sonnet-4-20250514'
 const MAX_TOKENS = 1500
@@ -33,9 +34,10 @@ function createClient(): Anthropic {
 
 function parseResponse(content: string): GeneratePostResult {
   let parsed: unknown
+  const jsonContent = extractJson(content)
 
   try {
-    parsed = JSON.parse(content)
+    parsed = JSON.parse(jsonContent)
   } catch (error) {
     throw createClaudeError(
       'INVALID_RESPONSE',

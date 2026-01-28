@@ -1,3 +1,4 @@
+export { ErrorAlert } from './ErrorAlert'
 export { FeaturePill } from './FeaturePill'
 export { StatusBadge } from './StatusBadge'
 export * from './icons'
