@@ -7,6 +7,7 @@ import { ToneSelector } from './ToneSelector'
 import { RegionSelector } from './RegionSelector'
 import { IdeaTextarea } from './IdeaTextarea'
 import { LoadingSpinner } from '@/components/shared'
+import { ErrorAlert } from '@/shared/components'
 import { IdeaConstraints } from '@/domain/entities/generated-post'
 import type { SubscriptionPlan } from '@/domain/entities/subscription'
 
@@ -71,22 +72,7 @@ export function PostGeneratorDashboard({ userName }: PostGeneratorDashboardProps
       ) : null}
 
       {/* Error Message */}
-      {error && (
-        <div
-          className="p-4 bg-error/10 border border-error/20 rounded-xl text-error text-sm flex items-center justify-between"
-          role="alert"
-        >
-          <span>{error}</span>
-          <button
-            type="button"
-            onClick={clearError}
-            className="text-error hover:text-error/80 font-medium"
-            aria-label="Cerrar mensaje de error"
-          >
-            Cerrar
-          </button>
-        </div>
-      )}
+      {error && <ErrorAlert message={error} onClose={clearError} />}
 
       {/* Generator Form */}
       <div className="bg-white rounded-xl shadow-sm border border-neutral-light p-6">
