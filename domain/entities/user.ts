@@ -9,6 +9,8 @@ export interface User {
   email: string
   name: string | null
   emailVerified: boolean
+  emailTips: boolean
+  emailUpdates: boolean
   createdAt: Date
   updatedAt: Date
 }
@@ -30,4 +32,6 @@ export interface UpdateUserData {
   email?: string
   name?: string | null
   emailVerified?: boolean
+  emailTips?: boolean
+  emailUpdates?: boolean
 }

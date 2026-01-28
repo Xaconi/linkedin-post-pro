@@ -18,6 +18,8 @@ export interface RawUserData {
   email: string
   name?: string | null
   emailVerified: boolean
+  emailTips?: boolean
+  emailUpdates?: boolean
   createdAt: Date | string
   updatedAt: Date | string
 }
@@ -35,6 +37,8 @@ export class UserFactory {
       email: data.email.toLowerCase().trim(),
       name: data.name ?? null,
       emailVerified: data.emailVerified,
+      emailTips: data.emailTips ?? true,
+      emailUpdates: data.emailUpdates ?? true,
       createdAt: data.createdAt instanceof Date ? data.createdAt : new Date(data.createdAt),
       updatedAt: data.updatedAt instanceof Date ? data.updatedAt : new Date(data.updatedAt),
     }

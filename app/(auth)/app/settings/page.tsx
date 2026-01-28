@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 
 import { userService } from '@/application/services'
 import { subscriptionService } from '@/application/services'
-import { AccountInfo } from '@/features/settings'
+import { AccountInfo, EmailPreferences } from '@/features/settings'
 import { Header } from '@/shared/components/layout'
 
 export const metadata = {
@@ -37,8 +37,6 @@ export default async function SettingsPage() {
 
   return (
     <div className="min-h-screen bg-neutral-light/30">
-      <Header />
-
       <main className="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
         {/* Page header */}
         <div className="mb-8">
@@ -56,6 +54,13 @@ export default async function SettingsPage() {
             user={user}
             plan={plan}
             clerkUserPortalUrl={clerkUserPortalUrl}
+          />
+
+          <EmailPreferences
+            initialPreferences={{
+              emailTips: user.emailTips,
+              emailUpdates: user.emailUpdates,
+            }}
           />
         </div>
       </main>

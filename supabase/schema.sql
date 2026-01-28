@@ -18,9 +18,15 @@ CREATE TABLE IF NOT EXISTS users (
   email TEXT UNIQUE NOT NULL,
   name TEXT,
   email_verified BOOLEAN DEFAULT false,
+  email_tips BOOLEAN DEFAULT true,
+  email_updates BOOLEAN DEFAULT true,
   created_at TIMESTAMPTZ DEFAULT now(),
   updated_at TIMESTAMPTZ DEFAULT now()
 );
+
+-- Migration for existing tables:
+-- ALTER TABLE users ADD COLUMN IF NOT EXISTS email_tips BOOLEAN DEFAULT true;
+-- ALTER TABLE users ADD COLUMN IF NOT EXISTS email_updates BOOLEAN DEFAULT true;
 
 -- Index for fast Clerk ID lookups
 CREATE INDEX IF NOT EXISTS idx_users_clerk_id ON users(clerk_user_id);

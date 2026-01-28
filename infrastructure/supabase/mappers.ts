@@ -24,6 +24,8 @@ export function mapDbUserToDomain(dbUser: DbUser): User {
     email: dbUser.email,
     name: dbUser.name,
     emailVerified: dbUser.email_verified,
+    emailTips: dbUser.email_tips ?? true,
+    emailUpdates: dbUser.email_updates ?? true,
     createdAt: dbUser.created_at,
     updatedAt: dbUser.updated_at,
   })
