@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react'
 
-import { LoadingSpinner } from '@/components/shared'
+import { LoadingSpinner } from '@/shared'
 import { IdeaTextarea } from './IdeaTextarea'
 import { PostTones, PostRegions, IdeaConstraints } from '@/domain/entities/generated-post'
 import type { PostTone, PostRegion } from '@/domain/entities/generated-post'

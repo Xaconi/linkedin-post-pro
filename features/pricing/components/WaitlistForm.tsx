@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import { LoadingSpinner } from '@/components/shared'
+import { LoadingSpinner } from '@/shared'
 import { validateEmail } from '@/utils/email'
 
 interface WaitlistFormProps {
@@ -66,11 +66,10 @@ export function WaitlistForm({
           onBlur={() => validateField(email)}
           disabled={isLoading}
           placeholder="tu@email.com"
-          className={`w-full rounded-xl border px-4 py-3 text-neutral-dark transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:cursor-not-allowed disabled:bg-neutral-light ${
-            emailError
+          className={`w-full rounded-xl border px-4 py-3 text-neutral-dark transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:cursor-not-allowed disabled:bg-neutral-light ${emailError
               ? 'border-error focus:border-error'
               : 'border-neutral-light focus:border-primary'
-          }`}
+            }`}
           autoComplete="email"
         />
         {emailError && (

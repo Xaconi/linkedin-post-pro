@@ -1,4 +1,4 @@
-import { LoadingSpinner } from '@/components/shared'
+import { LoadingSpinner } from '@/shared'
 
 /**
  * Global loading page for Next.js App Router

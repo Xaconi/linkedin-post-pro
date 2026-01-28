@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef } from 'react'
 
+import { CloseIcon } from '../icons'
+
 interface ModalProps {
   isOpen: boolean
   onClose: () => void
@@ -101,16 +103,7 @@ export function Modal({
           className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full text-neutral-medium transition-colors hover:bg-neutral-light hover:text-neutral-dark active:scale-95"
           aria-label="Cerrar"
         >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M5 5l10 10M15 5L5 15" />
-          </svg>
+          <CloseIcon className="h-5 w-5" />
         </button>
 
         {/* Title */}

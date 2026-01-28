@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { ChevronRightIcon } from '@/shared/components/icons'
 import type { User } from '@/domain/entities/user'
 import type { SubscriptionPlan } from '@/domain/entities/subscription'
 
@@ -72,21 +73,7 @@ export function AccountInfo({ user, plan, clerkUserPortalUrl }: AccountInfoProps
               className="inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary-hover"
             >
               Cambiar contraseña
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                className="opacity-60"
-              >
-                <path
-                  d="M6 12L10 8L6 4"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <ChevronRightIcon className="h-4 w-4 opacity-60" />
             </Link>
           ) : (
             <span className="text-sm text-neutral-medium">

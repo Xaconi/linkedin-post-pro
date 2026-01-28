@@ -1,4 +1,4 @@
-import { LoadingSpinner } from '@/components/shared'
+import { LoadingSpinner } from '@/shared'
 import { Header } from '@/shared/components/layout'
 
 /**
