@@ -1,3 +1,6 @@
 export { CheckIcon } from './CheckIcon'
 export { PricingCard } from './PricingCard'
 export type { PricingPlan } from './PricingCard'
+export { PricingPageContent } from './PricingPageContent'
+export { WaitlistForm } from './WaitlistForm'
+export { WaitlistModal } from './WaitlistModal'
