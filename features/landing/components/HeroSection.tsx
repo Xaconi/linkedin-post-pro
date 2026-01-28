@@ -4,15 +4,12 @@ import Link from 'next/link'
 
 import { PostCardPreview } from './PostCardPreview'
 import { FeaturePill } from '@/shared/components'
+import { scrollIntoId } from '@/shared/functions/scroll'
 
 /**
  * Hero section with compelling headline, CTAs, and animated post previews
  */
 export function HeroSection() {
-  const scrollToHowItWorks = () => {
-    document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })
-  }
-
   return (
     <section className="relative min-h-[90vh] overflow-hidden bg-white">
       {/* Background decorative elements */}
@@ -64,7 +61,7 @@ export function HeroSection() {
               Empezar gratis
             </Link>
             <button
-              onClick={scrollToHowItWorks}
+              onClick={() => scrollIntoId('how-it-works')}
               className="btn-secondary text-center"
             >
               Ver cómo funciona
@@ -107,7 +104,7 @@ export function HeroSection() {
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
         <button
-          onClick={scrollToHowItWorks}
+          onClick={() => scrollIntoId('problem-solution')}
           className="flex flex-col items-center gap-2 text-neutral-medium transition-colors hover:text-primary"
           aria-label="Scroll para ver más"
         >

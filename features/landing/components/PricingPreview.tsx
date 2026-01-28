@@ -44,7 +44,7 @@ const plans = [
  */
 export function PricingPreview() {
   return (
-    <section className="relative bg-neutral-light py-20 md:py-28">
+    <section id="pricing" className="relative bg-neutral-light py-20 md:py-28">
       {/* Background pattern */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -left-32 top-1/2 h-64 w-64 -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
@@ -113,11 +113,10 @@ function PricingCard({
 }) {
   return (
     <div
-      className={`relative overflow-hidden rounded-2xl p-8 transition-all ${
-        highlighted
+      className={`relative overflow-hidden rounded-2xl p-8 transition-all ${highlighted
           ? 'border-2 border-primary bg-white shadow-xl'
           : 'border border-neutral-light/50 bg-white shadow-sm hover:shadow-md'
-      }`}
+        }`}
     >
       {/* Popular badge */}
       {badge && (
@@ -142,11 +141,10 @@ function PricingCard({
       {ctaLink ? (
         <Link
           href={ctaLink}
-          className={`mb-8 block w-full rounded-xl py-3 text-center font-medium transition-all ${
-            highlighted
+          className={`mb-8 block w-full rounded-xl py-3 text-center font-medium transition-all ${highlighted
               ? 'bg-primary text-white hover:bg-primary-hover'
               : 'border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-white'
-          }`}
+            }`}
         >
           {cta}
         </Link>

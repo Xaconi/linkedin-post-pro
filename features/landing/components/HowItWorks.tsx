@@ -41,15 +41,20 @@ export function HowItWorks() {
   const sectionRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    let interval: NodeJS.Timeout | null = null
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             // Auto-animate through steps when section is visible
-            const interval = setInterval(() => {
+            interval = setInterval(() => {
               setActiveStep((prev) => (prev + 1) % steps.length)
             }, 3000)
-            return () => clearInterval(interval)
+          } else if (interval) {
+            // Clear interval when section leaves viewport
+            clearInterval(interval)
+            interval = null
           }
         })
       },
@@ -60,7 +65,10 @@ export function HowItWorks() {
       observer.observe(sectionRef.current)
     }
 
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      if (interval) clearInterval(interval)
+    }
   }, [])
 
   return (
@@ -139,6 +147,8 @@ function StepCard({
   return (
     <button
       onClick={onClick}
+      aria-label={`Paso ${number}: ${title}`}
+      aria-pressed={isActive}
       className={`group relative overflow-hidden rounded-2xl p-6 text-left transition-all ${
         isActive
           ? 'bg-neutral-dark shadow-xl'

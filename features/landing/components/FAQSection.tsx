@@ -47,7 +47,7 @@ export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section className="relative bg-white py-20 md:py-28">
+    <section id="faq" className="relative bg-white py-20 md:py-28">
       <div className="mx-auto max-w-3xl px-6">
         {/* Section header */}
         <div className="mb-16 text-center">
@@ -64,7 +64,7 @@ export function FAQSection() {
         <div className="space-y-4">
           {faqs.map((faq, index) => (
             <FAQItem
-              key={index}
+              key={faq.question}
               question={faq.question}
               answer={faq.answer}
               isOpen={openIndex === index}

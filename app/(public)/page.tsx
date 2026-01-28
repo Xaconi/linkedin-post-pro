@@ -6,18 +6,22 @@ import {
   FAQSection,
   FinalCTA,
   Footer,
+  StructuredData,
 } from '@features/landing'
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen">
-      <HeroSection />
-      <ProblemSolution />
-      <HowItWorks />
-      <PricingPreview />
-      <FAQSection />
-      <FinalCTA />
-      <Footer />
-    </main>
+    <>
+      <StructuredData />
+      <main className="min-h-screen">
+        <HeroSection />
+        <ProblemSolution />
+        <HowItWorks />
+        <PricingPreview />
+        <FAQSection />
+        <FinalCTA />
+        <Footer />
+      </main>
+    </>
   )
 }

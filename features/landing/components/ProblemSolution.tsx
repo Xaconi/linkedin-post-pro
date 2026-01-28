@@ -3,7 +3,7 @@
  */
 export function ProblemSolution() {
   return (
-    <section className="relative bg-neutral-light py-20 md:py-28">
+    <section id="problem-solution" className="relative bg-neutral-light py-20 md:py-28">
       {/* Subtle pattern overlay */}
       <div className="pointer-events-none absolute inset-0 opacity-50">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(10,102,194,0.03),transparent_50%)]" />
