@@ -13,6 +13,7 @@ export const metadata = {
 export default async function DashboardPage() {
   const user = await currentUser()
   const userName = user?.firstName || 'Usuario'
+  const userEmail = user?.emailAddresses?.[0]?.emailAddress || ''
 
-  return <PostGeneratorDashboard userName={userName} />
+  return <PostGeneratorDashboard userName={userName} userEmail={userEmail} />
 }
