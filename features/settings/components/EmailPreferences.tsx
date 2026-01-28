@@ -4,7 +4,7 @@ import { Toggle } from '@/shared/components/Toggle'
 import { CheckIcon } from '@/shared/components/icons'
 
 import { SettingsSection } from './SettingsSection'
-import { useEmailPreferences, type EmailPreferences as EmailPreferencesType } from '../hooks'
+import { useEmailPreferences, type EmailPreferencesType } from '../hooks'
 
 interface EmailPreferencesProps {
   initialPreferences: EmailPreferencesType

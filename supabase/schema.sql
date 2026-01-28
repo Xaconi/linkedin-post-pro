@@ -168,3 +168,6 @@ CREATE POLICY "Service role full access on pro_waitlist"
 -- ============================================
 -- END OF SCHEMA
 -- ============================================
+
+ALTER TABLE users ADD COLUMN IF NOT EXISTS email_tips BOOLEAN DEFAULT true;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS email_updates BOOLEAN DEFAULT true;

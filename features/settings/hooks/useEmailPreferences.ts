@@ -2,17 +2,17 @@
 
 import { useState, useCallback } from 'react'
 
-export interface EmailPreferences {
+export interface EmailPreferencesType {
   emailTips: boolean
   emailUpdates: boolean
 }
 
 interface UseEmailPreferencesOptions {
-  initialPreferences: EmailPreferences
+  initialPreferences: EmailPreferencesType
 }
 
 interface UseEmailPreferencesReturn {
-  preferences: EmailPreferences
+  preferences: EmailPreferencesType
   setEmailTips: (value: boolean) => void
   setEmailUpdates: (value: boolean) => void
   save: () => Promise<void>
@@ -29,8 +29,8 @@ interface UseEmailPreferencesReturn {
 export function useEmailPreferences({
   initialPreferences,
 }: UseEmailPreferencesOptions): UseEmailPreferencesReturn {
-  const [preferences, setPreferences] = useState<EmailPreferences>(initialPreferences)
-  const [savedPreferences, setSavedPreferences] = useState<EmailPreferences>(initialPreferences)
+  const [preferences, setPreferences] = useState<EmailPreferencesType>(initialPreferences)
+  const [savedPreferences, setSavedPreferences] = useState<EmailPreferencesType>(initialPreferences)
   const [isSaving, setIsSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
