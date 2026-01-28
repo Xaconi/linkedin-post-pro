@@ -129,6 +129,36 @@ CREATE POLICY "Service role full access on generated_posts"
   USING (true)
   WITH CHECK (true);
 
+-- --------------------------------------------
+-- PRO WAITLIST TABLE
+-- --------------------------------------------
+-- Stores Pro plan waitlist signups
+
+CREATE TABLE IF NOT EXISTS pro_waitlist (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES users(id) ON DELETE SET NULL,
+  email TEXT UNIQUE NOT NULL,
+  source TEXT NOT NULL CHECK (source IN ('pricing_page', 'dashboard')),
+  wants_tips BOOLEAN DEFAULT false,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- Index for email lookups
+CREATE INDEX IF NOT EXISTS idx_waitlist_email ON pro_waitlist(email);
+
+-- Index for sorting by date
+CREATE INDEX IF NOT EXISTS idx_waitlist_created_at ON pro_waitlist(created_at DESC);
+
+-- Enable RLS
+ALTER TABLE pro_waitlist ENABLE ROW LEVEL SECURITY;
+
+-- Policy: Service role full access
+CREATE POLICY "Service role full access on pro_waitlist"
+  ON pro_waitlist
+  FOR ALL
+  USING (true)
+  WITH CHECK (true);
+
 -- ============================================
 -- END OF SCHEMA
 -- ============================================
