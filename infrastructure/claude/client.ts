@@ -11,6 +11,7 @@ import type {
   GeneratePostResult,
   ClaudeApiError,
 } from './types'
+import { extractJson } from '@/shared/functions/json'
 
 const CLAUDE_MODEL = 'claude-sonnet-4-20250514'
 const MAX_TOKENS = 1500
@@ -29,15 +30,6 @@ function createClient(): Anthropic {
     apiKey: getApiKey(),
     timeout: REQUEST_TIMEOUT_MS,
   })
-}
-
-function extractJson(content: string): string {
-  // Remove markdown code blocks if present
-  const codeBlockMatch = content.match(/```(?:json)?\s*([\s\S]*?)```/)
-  if (codeBlockMatch) {
-    return codeBlockMatch[1].trim()
-  }
-  return content.trim()
 }
 
 function parseResponse(content: string): GeneratePostResult {
