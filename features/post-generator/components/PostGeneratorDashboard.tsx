@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+
 import { usePostGenerator } from '../hooks/usePostGenerator'
 import { PostCounter } from './PostCounter'
 import { PostVariants } from './PostVariants'
@@ -9,17 +11,24 @@ import { IdeaTextarea } from './IdeaTextarea'
 import { LoadingSpinner } from '@/components/shared'
 import { ErrorAlert } from '@/shared/components'
 import { IdeaConstraints } from '@/domain/entities/generated-post'
+import { WaitlistModal } from '@features/pricing'
 import type { SubscriptionPlan } from '@/domain/entities/subscription'
 
 interface PostGeneratorDashboardProps {
   userName: string
+  userEmail?: string
 }
 
 /**
  * Main dashboard component integrating all post generator features
  * Handles the complete flow: form, generation, and results display
  */
-export function PostGeneratorDashboard({ userName }: PostGeneratorDashboardProps) {
+export function PostGeneratorDashboard({
+  userName,
+  userEmail,
+}: PostGeneratorDashboardProps) {
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false)
+
   const {
     formState,
     setIdea,
@@ -133,9 +142,10 @@ export function PostGeneratorDashboard({ userName }: PostGeneratorDashboardProps
               Has agotado tus posts de este mes.{' '}
               <button
                 type="button"
+                onClick={() => setIsWaitlistOpen(true)}
                 className="text-primary hover:underline font-medium"
               >
-                Actualiza a Pro
+                Únete a la lista de espera Pro
               </button>
             </p>
           )}
@@ -144,6 +154,14 @@ export function PostGeneratorDashboard({ userName }: PostGeneratorDashboardProps
 
       {/* Generated Variants */}
       <PostVariants variants={variants} />
+
+      {/* Waitlist Modal */}
+      <WaitlistModal
+        isOpen={isWaitlistOpen}
+        onClose={() => setIsWaitlistOpen(false)}
+        source="dashboard"
+        defaultEmail={userEmail}
+      />
     </div>
   )
 }

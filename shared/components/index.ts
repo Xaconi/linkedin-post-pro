@@ -1,5 +1,6 @@
 export { ErrorAlert } from './ErrorAlert'
 export { FeaturePill } from './FeaturePill'
+export { Modal } from './Modal'
 export { StatusBadge } from './StatusBadge'
 export * from './icons'
 export * from './layout'

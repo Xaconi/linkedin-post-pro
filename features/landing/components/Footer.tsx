@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 const footerLinks = {
   producto: [
-    { label: 'Precios', href: '/#pricing' },
+    { label: 'Precios', href: '/pricing' },
     { label: 'Cómo funciona', href: '/#how-it-works' },
     { label: 'FAQ', href: '/#faq' },
   ],

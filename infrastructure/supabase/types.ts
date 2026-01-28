@@ -136,6 +136,41 @@ export type Database = {
           }
         ]
       }
+      pro_waitlist: {
+        Row: {
+          id: string
+          user_id: string | null
+          email: string
+          source: string
+          wants_tips: boolean
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string | null
+          email: string
+          source: string
+          wants_tips?: boolean
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string | null
+          email?: string
+          source?: string
+          wants_tips?: boolean
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'pro_waitlist_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never
