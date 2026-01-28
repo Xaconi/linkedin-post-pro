@@ -45,11 +45,10 @@ export function AccountInfo({ user, plan, clerkUserPortalUrl }: AccountInfoProps
         <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
           <span className="text-sm font-medium text-neutral-dark">Plan</span>
           <span
-            className={`inline-flex w-fit items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-              plan === 'pro'
+            className={`inline-flex w-fit items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${plan === 'pro'
                 ? 'bg-primary/10 text-primary'
                 : 'bg-neutral-light text-neutral-dark'
-            }`}
+              }`}
           >
             {plan === 'pro' ? 'Pro' : 'Free'}
           </span>
@@ -72,7 +71,7 @@ export function AccountInfo({ user, plan, clerkUserPortalUrl }: AccountInfoProps
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary-hover"
             >
-              Cambiar contrasena
+              Cambiar contraseña
               <svg
                 width="16"
                 height="16"
@@ -91,7 +90,7 @@ export function AccountInfo({ user, plan, clerkUserPortalUrl }: AccountInfoProps
             </Link>
           ) : (
             <span className="text-sm text-neutral-medium">
-              Gestiona tu contrasena desde tu proveedor de autenticacion
+              Gestiona tu contraseña desde tu proveedor de autenticacion
             </span>
           )}
         </div>
