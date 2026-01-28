@@ -25,6 +25,8 @@ export type Database = {
           email: string
           name: string | null
           email_verified: boolean
+          email_tips: boolean
+          email_updates: boolean
           created_at: string
           updated_at: string
         }
@@ -34,6 +36,8 @@ export type Database = {
           email: string
           name?: string | null
           email_verified?: boolean
+          email_tips?: boolean
+          email_updates?: boolean
           created_at?: string
           updated_at?: string
         }
@@ -43,6 +47,8 @@ export type Database = {
           email?: string
           name?: string | null
           email_verified?: boolean
+          email_tips?: boolean
+          email_updates?: boolean
           created_at?: string
           updated_at?: string
         }
