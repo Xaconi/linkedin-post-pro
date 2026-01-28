@@ -19,3 +19,11 @@ export {
   PostRegions,
   IdeaConstraints,
 } from './generated-post'
+
+export type {
+  WaitlistEntry,
+  CreateWaitlistData,
+  WaitlistSource,
+} from './waitlist'
+
+export { WaitlistSources } from './waitlist'

@@ -1,4 +1,6 @@
-export { CheckIcon } from './CheckIcon'
+export { ComparisonTable } from './ComparisonTable'
+export { FAQPreview } from './FAQPreview'
+export { HeroSection } from './HeroSection'
 export { PricingCard } from './PricingCard'
 export type { PricingPlan } from './PricingCard'
 export { PricingPageContent } from './PricingPageContent'

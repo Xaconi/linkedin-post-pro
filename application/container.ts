@@ -7,14 +7,17 @@
 import type { IUserRepository } from '@/domain/repositories/user-repository'
 import type { ISubscriptionRepository } from '@/domain/repositories/subscription-repository'
 import type { IGeneratedPostRepository } from '@/domain/repositories/generated-post-repository'
+import type { IWaitlistRepository } from '@/domain/repositories/waitlist-repository'
 import { SupabaseUserRepository } from '@/infrastructure/supabase/repositories/supabase-user-repository'
 import { SupabaseSubscriptionRepository } from '@/infrastructure/supabase/repositories/supabase-subscription-repository'
 import { SupabaseGeneratedPostRepository } from '@/infrastructure/supabase/repositories/supabase-generated-post-repository'
+import { SupabaseWaitlistRepository } from '@/infrastructure/supabase/repositories/supabase-waitlist-repository'
 
 class Container {
   private static userRepository: IUserRepository | null = null
   private static subscriptionRepository: ISubscriptionRepository | null = null
   private static generatedPostRepository: IGeneratedPostRepository | null = null
+  private static waitlistRepository: IWaitlistRepository | null = null
 
   /**
    * Get user repository instance
@@ -50,6 +53,17 @@ class Container {
   }
 
   /**
+   * Get waitlist repository instance
+   * Returns Supabase implementation by default
+   */
+  static getWaitlistRepository(): IWaitlistRepository {
+    if (!this.waitlistRepository) {
+      this.waitlistRepository = new SupabaseWaitlistRepository()
+    }
+    return this.waitlistRepository
+  }
+
+  /**
    * Override user repository (for testing or switching implementations)
    */
   static setUserRepository(repo: IUserRepository): void {
@@ -71,12 +85,20 @@ class Container {
   }
 
   /**
+   * Override waitlist repository (for testing or switching implementations)
+   */
+  static setWaitlistRepository(repo: IWaitlistRepository): void {
+    this.waitlistRepository = repo
+  }
+
+  /**
    * Reset all repositories to null (useful for tests)
    */
   static reset(): void {
     this.userRepository = null
     this.subscriptionRepository = null
     this.generatedPostRepository = null
+    this.waitlistRepository = null
   }
 }
 

@@ -1,29 +1,15 @@
 /**
  * Supabase Waitlist Repository Implementation
- * Handles Pro waitlist signups
+ * Implements IWaitlistRepository interface from domain layer
  */
 
+import type { IWaitlistRepository } from '@/domain/repositories/waitlist-repository'
+import type { WaitlistEntry, CreateWaitlistData, WaitlistSource } from '@/domain/entities/waitlist'
 import { createServerClient } from '../client'
 
-export interface WaitlistEntry {
-  id: string
-  userId: string | null
-  email: string
-  source: 'pricing_page' | 'dashboard'
-  wantsTips: boolean
-  createdAt: Date
-}
-
-export interface CreateWaitlistData {
-  email: string
-  source: 'pricing_page' | 'dashboard'
-  wantsTips: boolean
-  userId?: string | null
-}
-
-export class SupabaseWaitlistRepository {
+export class SupabaseWaitlistRepository implements IWaitlistRepository {
   /**
-   * Add email to waitlist (upsert to handle duplicates)
+   * Add or update waitlist entry (upsert by email)
    */
   async upsert(data: CreateWaitlistData): Promise<WaitlistEntry> {
     const supabase = createServerClient()
@@ -49,18 +35,11 @@ export class SupabaseWaitlistRepository {
       throw error
     }
 
-    return {
-      id: result.id,
-      userId: result.user_id,
-      email: result.email,
-      source: result.source as 'pricing_page' | 'dashboard',
-      wantsTips: result.wants_tips,
-      createdAt: new Date(result.created_at),
-    }
+    return this.mapToEntity(result)
   }
 
   /**
-   * Check if email is already in waitlist
+   * Find waitlist entry by email
    */
   async findByEmail(email: string): Promise<WaitlistEntry | null> {
     const supabase = createServerClient()
@@ -77,14 +56,7 @@ export class SupabaseWaitlistRepository {
       throw error
     }
 
-    return {
-      id: data.id,
-      userId: data.user_id,
-      email: data.email,
-      source: data.source as 'pricing_page' | 'dashboard',
-      wantsTips: data.wants_tips,
-      createdAt: new Date(data.created_at),
-    }
+    return this.mapToEntity(data)
   }
 
   /**
@@ -103,5 +75,26 @@ export class SupabaseWaitlistRepository {
     }
 
     return count ?? 0
+  }
+
+  /**
+   * Map database row to domain entity
+   */
+  private mapToEntity(row: {
+    id: string
+    user_id: string | null
+    email: string
+    source: string
+    wants_tips: boolean
+    created_at: string
+  }): WaitlistEntry {
+    return {
+      id: row.id,
+      userId: row.user_id,
+      email: row.email,
+      source: row.source as WaitlistSource,
+      wantsTips: row.wants_tips,
+      createdAt: new Date(row.created_at),
+    }
   }
 }

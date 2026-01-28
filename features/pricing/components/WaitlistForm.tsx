@@ -2,6 +2,9 @@
 
 import { useState } from 'react'
 
+import { LoadingSpinner } from '@/components/shared'
+import { validateEmail } from '@/utils/email'
+
 interface WaitlistFormProps {
   defaultEmail?: string
   isLoading: boolean
@@ -22,13 +25,12 @@ export function WaitlistForm({
   const [wantsTips, setWantsTips] = useState(false)
   const [emailError, setEmailError] = useState<string | null>(null)
 
-  const validateEmail = (value: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const validateField = (value: string): boolean => {
     if (!value) {
       setEmailError('El email es obligatorio')
       return false
     }
-    if (!emailRegex.test(value)) {
+    if (!validateEmail(value)) {
       setEmailError('Email inválido')
       return false
     }
@@ -38,7 +40,7 @@ export function WaitlistForm({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (validateEmail(email)) {
+    if (validateField(email)) {
       onSubmit(email, wantsTips)
     }
   }
@@ -59,9 +61,9 @@ export function WaitlistForm({
           value={email}
           onChange={(e) => {
             setEmail(e.target.value)
-            if (emailError) validateEmail(e.target.value)
+            if (emailError) validateField(e.target.value)
           }}
-          onBlur={() => validateEmail(email)}
+          onBlur={() => validateField(email)}
           disabled={isLoading}
           placeholder="tu@email.com"
           className={`w-full rounded-xl border px-4 py-3 text-neutral-dark transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:cursor-not-allowed disabled:bg-neutral-light ${
@@ -109,25 +111,7 @@ export function WaitlistForm({
       >
         {isLoading ? (
           <>
-            <svg
-              className="h-5 w-5 animate-spin"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              />
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-              />
-            </svg>
+            <LoadingSpinner size="sm" />
             Uniendo...
           </>
         ) : (

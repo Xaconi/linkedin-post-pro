@@ -7,9 +7,9 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { auth } from '@clerk/nextjs/server'
 
-import { userService } from '@/application/services/user-service'
-import { SupabaseWaitlistRepository } from '@/infrastructure/supabase/repositories'
-import { waitlistSchema } from '@/types/waitlist'
+import { userService, waitlistService } from '@/application/services'
+import { WaitlistSources } from '@/domain/entities/waitlist'
+import { validateEmail } from '@/utils/email'
 
 /**
  * Error response helper
@@ -27,21 +27,22 @@ function errorResponse(
  */
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    // 1. Parse and validate request body
+    // 1. Parse request body
     const body = await request.json()
-    const validationResult = waitlistSchema.safeParse(body)
+    const { email, source, wantsTips } = body
 
-    if (!validationResult.success) {
-      return errorResponse(
-        validationResult.error.errors[0]?.message || 'Datos inválidos',
-        400,
-        'VALIDATION_ERROR'
-      )
+    // 2. Validate email
+    if (!email || !validateEmail(email)) {
+      return errorResponse('Email inválido', 400, 'VALIDATION_ERROR')
     }
 
-    const { email, source, wantsTips } = validationResult.data
+    // 3. Validate source
+    const validSources = Object.values(WaitlistSources)
+    if (!source || !validSources.includes(source)) {
+      return errorResponse('Source inválido', 400, 'VALIDATION_ERROR')
+    }
 
-    // 2. Get user ID if authenticated (optional)
+    // 4. Get user ID if authenticated (optional)
     let userId: string | null = null
 
     try {
@@ -55,17 +56,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       // User not authenticated, continue without user_id
     }
 
-    // 3. Save to waitlist (upsert to handle duplicates)
-    const waitlistRepo = new SupabaseWaitlistRepository()
-
-    await waitlistRepo.upsert({
+    // 5. Save to waitlist via service
+    await waitlistService.join({
       email,
       source,
-      wantsTips,
+      wantsTips: wantsTips ?? false,
       userId,
     })
 
-    // 4. Return success
+    // 6. Return success
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Error adding to waitlist:', error)
