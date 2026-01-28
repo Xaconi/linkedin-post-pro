@@ -1,1 +1,8 @@
 export { PostCardPreview } from './PostCardPreview'
+export { HeroSection } from './HeroSection'
+export { ProblemSolution } from './ProblemSolution'
+export { HowItWorks } from './HowItWorks'
+export { PricingPreview } from './PricingPreview'
+export { FAQSection } from './FAQSection'
+export { FinalCTA } from './FinalCTA'
+export { Footer } from './Footer'
