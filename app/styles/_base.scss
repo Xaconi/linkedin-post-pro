@@ -6,6 +6,10 @@
     --gradient-subtle: #{$gradient-subtle};
   }
 
+  html {
+    @apply scroll-smooth bg-neutral-light;
+  }
+
   body {
     @apply text-neutral-dark;
   }

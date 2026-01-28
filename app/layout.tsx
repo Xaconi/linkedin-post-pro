@@ -17,21 +17,40 @@ const sourceSerif = Source_Serif_4({
 })
 
 export const metadata: Metadata = {
-  title: 'LinkedIn Post Pro - Genera posts de LinkedIn en español con IA',
+  title: {
+    default: 'LinkedIn Post Pro - Genera posts de LinkedIn en español con IA',
+    template: '%s | LinkedIn Post Pro',
+  },
   description:
     'Crea posts profesionales para LinkedIn en segundos. 3 variaciones, español nativo, sin sonar a robot. Empieza gratis.',
-  keywords: ['LinkedIn', 'posts', 'español', 'IA', 'generador', 'content creator'],
+  keywords: ['LinkedIn', 'posts', 'español', 'IA', 'generador', 'content creator', 'copywriting'],
   authors: [{ name: 'LinkedIn Post Pro' }],
+  creator: 'LinkedIn Post Pro',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://linkedinpostpro.com'),
   openGraph: {
-    title: 'LinkedIn Post Pro',
-    description: 'Genera posts de LinkedIn que conectan',
+    title: 'LinkedIn Post Pro - Genera posts de LinkedIn que conectan',
+    description: 'Crea posts profesionales para LinkedIn en segundos. 3 variaciones, español nativo, sin sonar a robot.',
     type: 'website',
     locale: 'es_ES',
+    siteName: 'LinkedIn Post Pro',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'LinkedIn Post Pro - Genera posts de LinkedIn en español con IA',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'LinkedIn Post Pro',
-    description: 'Genera posts de LinkedIn que conectan',
+    title: 'LinkedIn Post Pro - Genera posts de LinkedIn que conectan',
+    description: 'Crea posts profesionales para LinkedIn en segundos. 3 variaciones, español nativo, sin sonar a robot.',
+    images: ['/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 }
 
