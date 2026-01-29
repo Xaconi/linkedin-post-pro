@@ -165,9 +165,54 @@ CREATE POLICY "Service role full access on pro_waitlist"
   USING (true)
   WITH CHECK (true);
 
+-- --------------------------------------------
+-- MONTHLY POST RESET FUNCTION
+-- --------------------------------------------
+-- Resets posts_remaining to posts_limit for ALL active subscriptions
+-- Called on the 1st of each month by pg_cron
+
+CREATE OR REPLACE FUNCTION reset_monthly_posts()
+RETURNS INTEGER AS $$
+DECLARE
+  affected_rows INTEGER;
+BEGIN
+  UPDATE user_subscriptions
+  SET
+    posts_remaining = posts_limit,
+    cycle_start_date = CURRENT_DATE,
+    updated_at = now()
+  WHERE
+    status = 'active';
+
+  GET DIAGNOSTICS affected_rows = ROW_COUNT;
+
+  RETURN affected_rows;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- --------------------------------------------
+-- CRON JOB SETUP (requires pg_cron extension)
+-- --------------------------------------------
+-- Enable pg_cron extension first:
+-- CREATE EXTENSION IF NOT EXISTS pg_cron;
+--
+-- Schedule the job to run on the 1st of each month at 00:05 UTC:
+-- SELECT cron.schedule(
+--   'reset-monthly-posts',
+--   '5 0 1 * *',
+--   'SELECT reset_monthly_posts()'
+-- );
+--
+-- To verify scheduled jobs:
+-- SELECT * FROM cron.job;
+--
+-- To unschedule:
+-- SELECT cron.unschedule('reset-monthly-posts');
+
 -- ============================================
 -- END OF SCHEMA
 -- ============================================
 
+-- Migrations for existing tables:
 ALTER TABLE users ADD COLUMN IF NOT EXISTS email_tips BOOLEAN DEFAULT true;
 ALTER TABLE users ADD COLUMN IF NOT EXISTS email_updates BOOLEAN DEFAULT true;
