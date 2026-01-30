@@ -99,7 +99,7 @@ export function UserMenu() {
           <div className="py-1">
             <Link
               href="/app/settings"
-              className="w-full px-4 py-3 text-left text-sm text-neutral-dark hover:bg-neutral-light transition-colors flex items-center gap-3 min-h-[44px]"
+              className="w-full px-4 py-3 text-left text-sm text-neutral-dark hover:text-neutral-dark hover:bg-neutral-light transition-colors flex items-center gap-3 min-h-[44px]"
               role="menuitem"
               onClick={() => setIsOpen(false)}
             >
