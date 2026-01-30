@@ -39,22 +39,23 @@ const steps = [
 export function HowItWorks() {
   const [activeStep, setActiveStep] = useState(0)
   const sectionRef = useRef<HTMLDivElement>(null)
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Auto-animate through steps when section is visible
-            interval = setInterval(() => {
-              setActiveStep((prev) => (prev + 1) % steps.length)
-            }, 3000)
-          } else if (interval) {
-            // Clear interval when section leaves viewport
-            clearInterval(interval)
-            interval = null
+            if (!intervalRef.current) {
+              intervalRef.current = setInterval(() => {
+                setActiveStep((prev) => (prev + 1) % steps.length)
+              }, 3000)
+            }
+          } else {
+            if (intervalRef.current) {
+              clearInterval(intervalRef.current)
+              intervalRef.current = null
+            }
           }
         })
       },
@@ -67,7 +68,10 @@ export function HowItWorks() {
 
     return () => {
       observer.disconnect()
-      if (interval) clearInterval(interval)
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
     }
   }, [])
 
@@ -149,42 +153,37 @@ function StepCard({
       onClick={onClick}
       aria-label={`Paso ${number}: ${title}`}
       aria-pressed={isActive}
-      className={`group relative overflow-hidden rounded-2xl p-6 text-left transition-all ${
-        isActive
-          ? 'bg-neutral-dark shadow-xl'
-          : 'bg-neutral-light hover:bg-neutral-light/80'
-      }`}
+      className={`group relative overflow-hidden rounded-2xl p-6 text-left transition-all ${isActive
+        ? 'bg-neutral-dark shadow-xl'
+        : 'bg-neutral-light hover:bg-neutral-light/80'
+        }`}
     >
       {/* Step number */}
       <span
-        className={`absolute right-4 top-4 font-display text-5xl font-bold transition-colors ${
-          isActive ? 'text-white/10' : 'text-neutral-medium/20'
-        }`}
+        className={`absolute right-4 top-4 font-display text-5xl font-bold transition-colors ${isActive ? 'text-white/90' : 'text-neutral-medium/40'
+          }`}
       >
         {number}
       </span>
 
       {/* Icon container */}
       <div
-        className={`mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br ${color} text-2xl shadow-lg transition-transform ${
-          isActive ? 'scale-110' : 'group-hover:scale-105'
-        }`}
+        className={`mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br ${color} text-2xl shadow-lg transition-transform ${isActive ? 'scale-110' : 'group-hover:scale-105'
+          }`}
       >
         {icon}
       </div>
 
       {/* Content */}
       <h3
-        className={`mb-2 font-display text-lg font-semibold transition-colors ${
-          isActive ? 'text-white' : 'text-neutral-dark'
-        }`}
+        className={`mb-2 font-display text-lg font-semibold transition-colors ${isActive ? 'text-white' : 'text-neutral-dark'
+          }`}
       >
         {title}
       </h3>
       <p
-        className={`text-sm leading-relaxed transition-colors ${
-          isActive ? 'text-white/70' : 'text-neutral-medium'
-        }`}
+        className={`text-sm leading-relaxed transition-colors ${isActive ? 'text-white/70' : 'text-neutral-medium'
+          }`}
       >
         {description}
       </p>

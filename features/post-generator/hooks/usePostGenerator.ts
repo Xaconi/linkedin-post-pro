@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 
 import { useSubscription } from './useSubscription'
 import { PostTones, PostRegions } from '@/domain/entities/generated-post'
@@ -57,6 +57,10 @@ export function usePostGenerator(): UsePostGeneratorReturn {
   const [isGenerating, setIsGenerating] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  // Security to prevent concurrent generation calls
+  const isGeneratingRef = useRef(false);
+
+
   // Subscription data
   const {
     data: subscription,
@@ -88,6 +92,9 @@ export function usePostGenerator(): UsePostGeneratorReturn {
 
   // Generate posts
   const generate = useCallback(async () => {
+    if (isGeneratingRef.current) return
+    isGeneratingRef.current = true
+
     // Clear previous state
     setError(null)
     setIsGenerating(true)
@@ -126,6 +133,7 @@ export function usePostGenerator(): UsePostGeneratorReturn {
     } catch {
       setError('Error de conexión. Inténtalo de nuevo.')
     } finally {
+      isGeneratingRef.current = false
       setIsGenerating(false)
     }
   }, [formState, decrementPosts])
@@ -145,10 +153,10 @@ export function usePostGenerator(): UsePostGeneratorReturn {
     // Subscription state
     subscription: subscription
       ? {
-          postsRemaining: subscription.postsRemaining,
-          postsLimit: subscription.postsLimit,
-          plan: subscription.plan,
-        }
+        postsRemaining: subscription.postsRemaining,
+        postsLimit: subscription.postsLimit,
+        plan: subscription.plan,
+      }
       : null,
     isLoadingSubscription,
 

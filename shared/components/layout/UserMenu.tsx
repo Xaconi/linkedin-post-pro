@@ -26,11 +26,7 @@ export function UserMenu() {
     }
 
     document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
 
-  // Close menu on Escape key
-  useEffect(() => {
     function handleEscape(event: KeyboardEvent) {
       if (event.key === 'Escape') {
         setIsOpen(false)
@@ -38,7 +34,10 @@ export function UserMenu() {
     }
 
     document.addEventListener('keydown', handleEscape)
-    return () => document.removeEventListener('keydown', handleEscape)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('keydown', handleEscape)
+    }
   }, [])
 
   if (!user) return null
@@ -100,7 +99,7 @@ export function UserMenu() {
           <div className="py-1">
             <Link
               href="/app/settings"
-              className="w-full px-4 py-3 text-left text-sm text-neutral-dark hover:bg-neutral-light transition-colors flex items-center gap-3 min-h-[44px]"
+              className="w-full px-4 py-3 text-left text-sm text-neutral-dark hover:text-neutral-dark hover:bg-neutral-light transition-colors flex items-center gap-3 min-h-[44px]"
               role="menuitem"
               onClick={() => setIsOpen(false)}
             >

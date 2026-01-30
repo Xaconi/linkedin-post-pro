@@ -60,7 +60,7 @@ export function IdeaTextarea({
           disabled={disabled}
           placeholder="Ej: Cómo aumentar la productividad trabajando desde casa..."
           rows={4}
-          maxLength={MAX_CHARACTERS + 10}
+          maxLength={MAX_CHARACTERS}
           aria-describedby={`${id}-counter ${id}-helper`}
           aria-invalid={hasError ? 'true' : 'false'}
           className={`
