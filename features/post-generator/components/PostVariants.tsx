@@ -23,7 +23,7 @@ export function PostVariants({ variants }: PostVariantsProps) {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {variants.map((variant, index) => (
-          <PostVariantCard key={index} variant={variant} index={index} />
+          <PostVariantCard key={variant} variant={variant} index={index} />
         ))}
       </div>
     </section>
