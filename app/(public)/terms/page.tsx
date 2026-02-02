@@ -33,8 +33,8 @@ export default function TermsPage() {
               <h2 className="font-display text-xl font-semibold">2. Descripción del servicio</h2>
               <p className="mt-3 leading-relaxed text-neutral-medium">
                 LinkedIn Post Pro es una herramienta de generación de contenido mediante inteligencia
-                artificial para crear posts de LinkedIn en español. Ofrecemos un plan gratuito limitado
-                y planes de pago con más funcionalidades.
+                artificial para crear posts de LinkedIn en español. Actualmente ofrecemos un plan gratuito
+                limitado. Próximamente estarán disponibles planes de pago con más funcionalidades.
               </p>
             </section>
 
@@ -84,9 +84,10 @@ export default function TermsPage() {
             <section>
               <h2 className="font-display text-xl font-semibold">7. Pagos y reembolsos</h2>
               <p className="mt-3 leading-relaxed text-neutral-medium">
-                Los planes de pago se facturan mensualmente. Puedes cancelar en cualquier momento,
-                manteniendo acceso hasta el final del período pagado. No ofrecemos reembolsos por
-                períodos parciales, excepto en casos excepcionales a nuestra discreción.
+                <strong>Próximamente:</strong> Los planes de pago estarán disponibles en el futuro y se
+                facturarán mensualmente. Podrás cancelar en cualquier momento, manteniendo acceso hasta
+                el final del período pagado. No ofreceremos reembolsos por períodos parciales, excepto
+                en casos excepcionales a nuestra discreción.
               </p>
             </section>
 

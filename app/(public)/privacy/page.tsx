@@ -45,7 +45,7 @@ export default function PrivacyPage() {
                 <li><strong>Datos de registro:</strong> Email, nombre (opcional) proporcionados al crear cuenta.</li>
                 <li><strong>Datos de uso:</strong> Posts generados, preferencias de tono, estadísticas de uso.</li>
                 <li><strong>Datos técnicos:</strong> Dirección IP, tipo de navegador, dispositivo.</li>
-                <li><strong>Datos de pago:</strong> Gestionados por Stripe, no almacenamos datos de tarjeta.</li>
+                <li><strong>Datos de pago (próximamente):</strong> Cuando estén disponibles los planes de pago, serán gestionados por Stripe. No almacenaremos datos de tarjeta.</li>
               </ul>
             </section>
 
@@ -81,7 +81,7 @@ export default function PrivacyPage() {
                 <li><strong>Clerk:</strong> Para autenticación de usuarios.</li>
                 <li><strong>Supabase:</strong> Para almacenamiento de datos.</li>
                 <li><strong>Anthropic (Claude):</strong> Para generación de contenido IA.</li>
-                <li><strong>Stripe:</strong> Para procesamiento de pagos.</li>
+                <li><strong>Stripe (próximamente):</strong> Para procesamiento de pagos cuando estén disponibles los planes de pago.</li>
                 <li><strong>Vercel:</strong> Para hosting de la aplicación.</li>
               </ul>
               <p className="mt-3 leading-relaxed text-neutral-medium">
