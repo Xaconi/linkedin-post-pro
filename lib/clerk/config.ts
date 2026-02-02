@@ -13,13 +13,16 @@ export const CLERK_URLS = {
   afterSignUp: process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL || '/app/dashboard',
 } as const
 
-// Public routes configuration (for reference, actual matching is in middleware.ts)
+// Public routes configuration (for reference, actual matching is in proxy.ts)
 export const PUBLIC_ROUTES = [
   '/',
   '/login',
   '/signup',
   '/pricing',
   '/forgot-password',
+  '/terms',
+  '/privacy',
+  '/cookies',
 ] as const
 
 // Protected route patterns
