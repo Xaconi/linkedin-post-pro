@@ -3,6 +3,8 @@ import { DM_Sans, Source_Serif_4 } from 'next/font/google'
 
 import type { Metadata } from 'next'
 
+import { Analytics } from "@vercel/analytics/next"
+
 import { clerkLocalization } from '@/lib/clerk'
 import './globals.scss'
 
@@ -64,6 +66,7 @@ export default function RootLayout({
       <html lang="es">
         <body className={`${dmSans.variable} ${sourceSerif.variable} font-sans antialiased`}>
           {children}
+          <Analytics />
         </body>
       </html>
     </ClerkProvider>
