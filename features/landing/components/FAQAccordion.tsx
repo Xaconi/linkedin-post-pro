@@ -16,7 +16,7 @@ interface FAQAccordionProps {
 
 /**
  * Client component for FAQ accordion state management
- * Keeps FAQSection as SSR by isolating useState
+ * FAQ data is passed from server, ensuring content is in initial HTML
  */
 export function FAQAccordion({ faqs, defaultOpenIndex = 0 }: FAQAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(defaultOpenIndex)

@@ -58,7 +58,7 @@ export function FAQSection() {
           </h2>
         </div>
 
-        {/* FAQ items */}
+        {/* FAQ items - data from server, interactivity in client */}
         <FAQAccordion faqs={faqs} defaultOpenIndex={0} />
 
         {/* Contact CTA */}
