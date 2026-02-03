@@ -1,4 +1,5 @@
 export { PostCardPreview } from './PostCardPreview'
+export { ScrollButton } from './ScrollButton'
 export { HeroSection } from './HeroSection'
 export { ProblemSolution } from './ProblemSolution'
 export { HowItWorks } from './HowItWorks'

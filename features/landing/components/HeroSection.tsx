@@ -1,10 +1,8 @@
-'use client'
-
 import Link from 'next/link'
 
 import { PostCardPreview } from './PostCardPreview'
+import { ScrollButton } from './ScrollButton'
 import { FeaturePill } from '@/shared/components'
-import { scrollIntoId } from '@/shared/functions/scroll'
 
 /**
  * Hero section with compelling headline, CTAs, and animated post previews
@@ -60,12 +58,12 @@ export function HeroSection() {
             <Link href="/signup" className="btn-primary text-center">
               Empezar gratis
             </Link>
-            <button
-              onClick={() => scrollIntoId('how-it-works')}
+            <ScrollButton
+              targetId="how-it-works"
               className="btn-secondary text-center"
             >
               Ver cómo funciona
-            </button>
+            </ScrollButton>
           </div>
 
           <p className="animate-fade-in-up-delayed-2 mt-4 text-sm text-neutral-medium">
@@ -103,16 +101,16 @@ export function HeroSection() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <button
-          onClick={() => scrollIntoId('problem-solution')}
+        <ScrollButton
+          targetId="problem-solution"
           className="flex flex-col items-center gap-2 text-neutral-medium transition-colors hover:text-primary"
-          aria-label="Scroll para ver más"
+          ariaLabel="Scroll para ver más"
         >
           <span className="text-xs">Descubre más</span>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M12 5v14M5 12l7 7 7-7" />
           </svg>
-        </button>
+        </ScrollButton>
       </div>
     </section>
   )
