@@ -1,14 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-
 import { PLAN_FEATURES, PLAN_LIMITS } from '@/config/plans'
 
 import { ComparisonTable } from './ComparisonTable'
 import { FAQPreview } from './FAQPreview'
 import { HeroSection } from './HeroSection'
 import { PricingCard } from './PricingCard'
-import { WaitlistModal } from './WaitlistModal'
+import { WaitlistTrigger } from './WaitlistTrigger'
 
 const plans = [
   {
@@ -50,37 +48,32 @@ const plans = [
 ]
 
 /**
- * Client component for pricing page with waitlist modal integration
+ * Pricing page content - Client component (required for render props callbacks)
+ * Plan data defined here, modal state managed by WaitlistTrigger
+ * Content is SSR'd by Next.js and included in initial HTML
  */
 export function PricingPageContent() {
-  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false)
-
-  const openWaitlist = () => setIsWaitlistOpen(true)
-  const closeWaitlist = () => setIsWaitlistOpen(false)
-
   return (
-    <>
-      <HeroSection>
-        <div className="grid gap-8 md:grid-cols-2">
-          {plans.map((plan) => (
-            <PricingCard
-              key={plan.name}
-              {...plan}
-              onCtaClick={plan.ctaLink === null ? openWaitlist : undefined}
-            />
-          ))}
-        </div>
-      </HeroSection>
+    <WaitlistTrigger source="pricing_page">
+      {(openWaitlist) => (
+        <>
+          <HeroSection>
+            <div className="grid gap-8 md:grid-cols-2">
+              {plans.map((plan) => (
+                <PricingCard
+                  key={plan.name}
+                  {...plan}
+                  onCtaClick={plan.ctaLink === null ? openWaitlist : undefined}
+                />
+              ))}
+            </div>
+          </HeroSection>
 
-      <ComparisonTable onProClick={openWaitlist} />
+          <ComparisonTable onProClick={openWaitlist} />
 
-      <FAQPreview />
-
-      <WaitlistModal
-        isOpen={isWaitlistOpen}
-        onClose={closeWaitlist}
-        source="pricing_page"
-      />
-    </>
+          <FAQPreview />
+        </>
+      )}
+    </WaitlistTrigger>
   )
 }
