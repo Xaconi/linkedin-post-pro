@@ -22,10 +22,10 @@ export function FinalCTA() {
         </div>
 
         <h2 className="mb-6 font-display text-3xl font-bold text-white md:text-4xl lg:text-5xl">
-          Deja de sufrir con LinkedIn.
+          Deja de pensar qué publicar.
           <br />
           <span className="bg-gradient-to-r from-primary-light via-white to-secondary-light bg-clip-text text-transparent">
-            Empieza a conectar.
+            Empieza a destacar.
           </span>
         </h2>
 
@@ -39,7 +39,7 @@ export function FinalCTA() {
             href="/signup"
             className="inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 font-semibold text-neutral-dark shadow-lg transition-all hover:scale-105 hover:shadow-xl"
           >
-            Empezar gratis
+            Crea tu primer post gratis
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M5 10h10M11 6l4 4-4 4" />
             </svg>
