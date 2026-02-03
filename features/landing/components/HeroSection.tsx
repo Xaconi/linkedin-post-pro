@@ -38,14 +38,14 @@ export function HeroSection() {
             </span>
             <br />
             <span className="text-gradient font-display text-4xl font-bold md:text-5xl lg:text-6xl">
-              que conectan
+              que destacan en el feed
             </span>
           </h1>
 
           <p className="animate-fade-in-up-delayed mb-8 max-w-lg text-lg text-neutral-medium md:text-xl">
             Escribe tu idea y obtén{' '}
-            <span className="font-medium text-neutral-dark">3 variaciones en español nativo</span>.
-            Sin sonar a robot.
+            <span className="font-medium text-neutral-dark">3 posts profesionales en segundos</span>.
+            En español nativo, sin sonar a robot.
           </p>
 
           <div className="animate-fade-in-up-delayed mb-10 flex flex-wrap gap-3">
@@ -56,7 +56,7 @@ export function HeroSection() {
 
           <div className="animate-fade-in-up-delayed-2 flex flex-col gap-4 sm:flex-row sm:items-center">
             <Link href="/signup" className="btn-primary text-center">
-              Empezar gratis
+              Crea tu primer post gratis
             </Link>
             <ScrollButton
               targetId="how-it-works"

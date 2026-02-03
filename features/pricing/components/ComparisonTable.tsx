@@ -70,7 +70,7 @@ export function ComparisonTable({ onProClick }: ComparisonTableProps) {
                 <tr className="border-b-2 border-neutral-light">
                   <th className="px-6 py-5 text-left">
                     <span className="text-xs font-semibold uppercase tracking-wider text-neutral-medium">
-                      Caracteristica
+                      Característica
                     </span>
                   </th>
                   <th className="px-6 py-5 text-center">
