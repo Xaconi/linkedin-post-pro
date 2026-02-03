@@ -1,8 +1,6 @@
-'use client'
-
 import { EMAIL_SUPPORT } from '@/config/constants'
-import { useState } from 'react'
-import { FAQItem } from './FAQItem'
+
+import { FAQAccordion } from './FAQAccordion'
 
 const faqs = [
   {
@@ -46,8 +44,6 @@ const faqs = [
  * FAQ section with accordion
  */
 export function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
-
   return (
     <section id="faq" className="relative bg-white py-20 md:py-28">
       <div className="mx-auto max-w-3xl px-6">
@@ -63,17 +59,7 @@ export function FAQSection() {
         </div>
 
         {/* FAQ items */}
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <FAQItem
-              key={faq.question}
-              question={faq.question}
-              answer={faq.answer}
-              isOpen={openIndex === index}
-              onClick={() => setOpenIndex(openIndex === index ? null : index)}
-            />
-          ))}
-        </div>
+        <FAQAccordion faqs={faqs} defaultOpenIndex={0} />
 
         {/* Contact CTA */}
         <div className="mt-12 text-center">
