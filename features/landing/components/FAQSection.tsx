@@ -4,7 +4,12 @@ import { FAQAccordion } from './FAQAccordion'
 
 const faqs = [
   {
-    question: '¿LinkedIn Post Pro es realmente gratis?',
+    question: '¿Qué es un generador de posts para LinkedIn con IA?',
+    answer:
+      'Es una herramienta que usa inteligencia artificial para crear contenido profesional para LinkedIn automáticamente. Tú escribes tu idea y la IA genera posts optimizados en español, listos para publicar.',
+  },
+  {
+    question: '¿El generador de posts LinkedIn es realmente gratis?',
     answer:
       'Sí, el plan Free es 100% gratis para siempre. Incluye 5 posts al mes, acceso a los 3 tonos y las 2 regiones. Sin tarjeta de crédito, sin trucos. Si necesitas más, puedes actualizar a Pro.',
   },
@@ -14,7 +19,7 @@ const faqs = [
       'Profesional es ideal para contenido corporativo y ejecutivo. Cercano suena conversacional y personal, perfecto para conectar emocionalmente. Inspiracional es motivacional y emotivo, ideal para historias transformadoras.',
   },
   {
-    question: '¿El español suena natural o traducido?',
+    question: '¿Los posts generados por IA suenan naturales en español?',
     answer:
       'Nuestra IA está entrenada específicamente para español. No traducimos del inglés. El contenido se genera directamente en español con expresiones, modismos y matices naturales según la región que elijas.',
   },

@@ -58,11 +58,11 @@ export function PricingPreview() {
             Precios simples
           </span>
           <h2 className="mb-4 font-display text-3xl font-bold text-neutral-dark md:text-4xl">
-            Empieza gratis,{' '}
-            <span className="text-gradient">crece cuando quieras</span>
+            Generador de posts LinkedIn{' '}
+            <span className="text-gradient">gratis y Pro</span>
           </h2>
           <p className="mx-auto max-w-xl text-neutral-medium">
-            Sin sorpresas, sin letra pequeña. Cancela cuando quieras.
+            Empieza gratis con 5 posts al mes. Sin sorpresas, sin letra pequeña.
           </p>
         </div>
 

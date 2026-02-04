@@ -22,16 +22,16 @@ export function FinalCTA() {
         </div>
 
         <h2 className="mb-6 font-display text-3xl font-bold text-white md:text-4xl lg:text-5xl">
-          Deja de pensar qué publicar.
+          Genera tu primer post para LinkedIn
           <br />
           <span className="bg-gradient-to-r from-primary-light via-white to-secondary-light bg-clip-text text-transparent">
-            Empieza a destacar.
+            gratis y en segundos
           </span>
         </h2>
 
         <p className="mx-auto mb-10 max-w-xl text-lg text-white/70">
-          Únete a los creadores de contenido que ya generan posts profesionales en español
-          con un solo clic.
+          Únete a los creadores de contenido que ya usan IA para escribir posts en LinkedIn
+          en español de forma profesional.
         </p>
 
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
