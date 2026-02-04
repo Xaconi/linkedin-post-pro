@@ -34,18 +34,18 @@ export function HeroSection() {
 
           <h1 className="animate-fade-in-up mb-6 text-balance leading-[1.1]">
             <span className="font-display text-4xl font-bold text-neutral-dark md:text-5xl lg:text-6xl">
-              Genera posts de LinkedIn
+              Generador de Posts para LinkedIn
             </span>
             <br />
             <span className="text-gradient font-display text-4xl font-bold md:text-5xl lg:text-6xl">
-              que conectan
+              con IA en Español
             </span>
           </h1>
 
           <p className="animate-fade-in-up-delayed mb-8 max-w-lg text-lg text-neutral-medium md:text-xl">
-            Escribe tu idea y obtén{' '}
-            <span className="font-medium text-neutral-dark">3 variaciones en español nativo</span>.
-            Sin sonar a robot.
+            Crea contenido profesional para LinkedIn en segundos.{' '}
+            <span className="font-medium text-neutral-dark">3 variaciones en español nativo</span>,
+            sin sonar a robot.
           </p>
 
           <div className="animate-fade-in-up-delayed mb-10 flex flex-wrap gap-3">

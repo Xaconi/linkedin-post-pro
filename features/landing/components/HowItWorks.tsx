@@ -58,14 +58,14 @@ export function HowItWorks() {
             Cómo funciona
           </span>
           <h2 className="mb-4 font-display text-3xl font-bold text-neutral-dark md:text-4xl">
-            De idea a post en{' '}
+            Cómo crear posts para LinkedIn con IA en{' '}
             <span className="relative inline-block">
-              segundos
+              4 pasos
               <span className="absolute -bottom-1 left-0 h-3 w-full bg-primary/10" />
             </span>
           </h2>
           <p className="mx-auto max-w-xl text-neutral-medium">
-            Un proceso simple de 4 pasos que te ahorra horas de trabajo cada semana
+            Genera contenido profesional para LinkedIn en segundos. Así de fácil.
           </p>
         </div>
 
