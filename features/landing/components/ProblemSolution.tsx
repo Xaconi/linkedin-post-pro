@@ -17,9 +17,9 @@ export function ProblemSolution() {
             El problema
           </span>
           <h2 className="font-display text-3xl font-bold text-neutral-dark md:text-4xl">
-            Escribir en LinkedIn es{' '}
+            ¿Por qué escribir posts en LinkedIn es tan{' '}
             <span className="relative">
-              agotador
+              difícil
               <svg
                 className="absolute -bottom-2 left-0 w-full text-error/30"
                 viewBox="0 0 200 12"
@@ -34,6 +34,7 @@ export function ProblemSolution() {
                 />
               </svg>
             </span>
+            ?
           </h2>
         </div>
 
@@ -62,12 +63,12 @@ export function ProblemSolution() {
             La solución
           </span>
           <h2 className="mb-6 font-display text-3xl font-bold text-neutral-dark md:text-4xl">
-            IA que entiende el{' '}
-            <span className="text-gradient">español de verdad</span>
+            Genera posts LinkedIn con IA en{' '}
+            <span className="text-gradient">español nativo</span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-neutral-medium">
-            LinkedIn Post Pro está entrenado específicamente para crear contenido en español
-            nativo. Elige entre español de España o Latinoamérica, con expresiones y matices
+            Nuestro generador de contenido para LinkedIn está entrenado específicamente para crear posts en español.
+            Elige entre español de España o Latinoamérica, con expresiones y matices
             que suenan <span className="font-medium text-neutral-dark">naturales y auténticos</span>.
           </p>
         </div>

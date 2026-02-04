@@ -1,0 +1,13 @@
+# LinkedIn Post Pro - Robots.txt
+# https://linkedinpostpro.com
+
+User-agent: *
+Allow: /
+Disallow: /app/
+Disallow: /api/
+Disallow: /login
+Disallow: /signup
+Disallow: /forgot-password
+
+# Sitemap
+Sitemap: https://linkedinpostpro.com/sitemap.xml
