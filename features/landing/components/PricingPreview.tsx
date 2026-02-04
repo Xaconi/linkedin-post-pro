@@ -22,7 +22,7 @@ const plans = [
     name: 'Pro',
     price: '8',
     period: '/mes',
-    description: 'Para creadores de contenido serios',
+    description: 'Para quienes publican cada semana',
     features: [
       '50 posts al mes',
       '3 tonos diferentes',

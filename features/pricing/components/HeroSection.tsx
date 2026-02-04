@@ -52,7 +52,7 @@ export function HeroSection({ children }: HeroSectionProps) {
             href="/login"
             className="text-sm font-medium text-neutral-medium transition-colors hover:text-primary"
           >
-            Iniciar sesion
+            Iniciar sesión
           </Link>
         </nav>
 
@@ -74,7 +74,7 @@ export function HeroSection({ children }: HeroSectionProps) {
             </span>
           </h1>
           <p className="mx-auto max-w-lg text-center text-lg text-neutral-medium md:text-xl">
-            Empieza gratis hoy. Sin tarjeta de credito.
+            Empieza gratis hoy. Sin tarjeta de crédito.
           </p>
         </div>
 

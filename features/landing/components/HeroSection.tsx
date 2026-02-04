@@ -55,8 +55,8 @@ export function HeroSection() {
           </div>
 
           <div className="animate-fade-in-up-delayed-2 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <Link href="/signup" className="btn-primary text-center">
-              Empezar gratis
+            <Link href="/signup" className="btn-primary text-center hover:text-white">
+              Crea tu primer post gratis
             </Link>
             <ScrollButton
               targetId="how-it-works"

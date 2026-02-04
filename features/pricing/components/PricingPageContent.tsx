@@ -30,7 +30,7 @@ const plans = [
     name: PLAN_LIMITS.PRO.name,
     price: String(PLAN_LIMITS.PRO.price),
     period: '/mes',
-    description: 'Para creadores de contenido serios',
+    description: 'Para quienes publican cada semana',
     features: [
       `${PLAN_LIMITS.PRO.postsPerMonth} posts al mes`,
       `${PLAN_FEATURES.tonesAvailable} tonos diferentes`,
