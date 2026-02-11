@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from 'react'
 
 import Link from 'next/link'
 
-import { ChevronDownIcon, LogoutIcon, SettingsIcon } from '@/shared/components/icons'
+import { ChevronDownIcon, ClockIcon, LogoutIcon, SettingsIcon } from '@/shared/components/icons'
 
 /**
  * User dropdown menu with avatar and logout
@@ -97,6 +97,15 @@ export function UserMenu() {
 
           {/* Menu Items */}
           <div className="py-1">
+            <Link
+              href="/app/history"
+              className="w-full px-4 py-3 text-left text-sm text-neutral-dark hover:text-neutral-dark hover:bg-neutral-light transition-colors flex items-center gap-3 min-h-[44px]"
+              role="menuitem"
+              onClick={() => setIsOpen(false)}
+            >
+              <ClockIcon className="w-5 h-5 text-neutral-medium" />
+              Historial
+            </Link>
             <Link
               href="/app/settings"
               className="w-full px-4 py-3 text-left text-sm text-neutral-dark hover:text-neutral-dark hover:bg-neutral-light transition-colors flex items-center gap-3 min-h-[44px]"
