@@ -57,4 +57,4 @@ export {
 export type { PlanConfig } from './constants'
 
 // Repository Interfaces
-export type { IUserRepository, ISubscriptionRepository, IGeneratedPostRepository } from './repositories'
+export type { IUserRepository, ISubscriptionRepository, IGeneratedPostRepository, PaginatedResult } from './repositories'
