@@ -17,9 +17,8 @@ export const FEATURE_FLAGS = {
 
   /**
    * Enable post history feature
-   * Currently disabled - not in MVP scope
    */
-  ENABLE_POST_HISTORY: process.env.NEXT_PUBLIC_ENABLE_POST_HISTORY === 'true',
+  ENABLE_POST_HISTORY: true,
 
   /**
    * Enable post scheduling feature
