@@ -7,3 +7,10 @@ export type {
   GeneratePostResult,
   GeneratePostErrorCode,
 } from './generate-post'
+
+export { getPostHistoryUseCase, GetPostHistoryError, GetPostHistoryErrorCodes } from './get-post-history'
+export type {
+  GetPostHistoryInput,
+  GetPostHistoryResult,
+  GetPostHistoryErrorCode,
+} from './get-post-history'

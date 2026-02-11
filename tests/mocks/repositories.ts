@@ -5,7 +5,7 @@
 
 import type { IUserRepository } from '@/domain/repositories/user-repository'
 import type { ISubscriptionRepository } from '@/domain/repositories/subscription-repository'
-import type { IGeneratedPostRepository } from '@/domain/repositories/generated-post-repository'
+import type { IGeneratedPostRepository, PaginatedResult } from '@/domain/repositories/generated-post-repository'
 import type { User, CreateUserData, UpdateUserData } from '@/domain/entities/user'
 import type {
   Subscription,
@@ -221,6 +221,16 @@ export class MockGeneratedPostRepository implements IGeneratedPostRepository {
       .map((id) => this.posts.get(id))
       .filter((post): post is GeneratedPost => post !== undefined)
       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+  }
+
+  async findByUserIdPaginated(userId: string, page: number, limit: number): Promise<PaginatedResult<GeneratedPost>> {
+    const allPosts = await this.findByUserId(userId)
+    const offset = (page - 1) * limit
+    const data = allPosts.slice(offset, offset + limit)
+    return {
+      data,
+      hasMore: offset + limit < allPosts.length,
+    }
   }
 
   async create(data: CreateGeneratedPostData): Promise<GeneratedPost> {

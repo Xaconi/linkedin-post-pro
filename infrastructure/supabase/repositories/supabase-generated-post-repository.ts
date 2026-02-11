@@ -3,7 +3,7 @@
  * Implements IGeneratedPostRepository interface from domain layer
  */
 
-import type { IGeneratedPostRepository } from '@/domain/repositories/generated-post-repository'
+import type { IGeneratedPostRepository, PaginatedResult } from '@/domain/repositories/generated-post-repository'
 import type { GeneratedPost, CreateGeneratedPostData } from '@/domain/entities/generated-post'
 import { createServerClient } from '../client'
 import { mapDbGeneratedPostToDomain } from '../mappers'
@@ -42,6 +42,28 @@ export class SupabaseGeneratedPostRepository implements IGeneratedPostRepository
     }
 
     return data.map(mapDbGeneratedPostToDomain)
+  }
+
+  async findByUserIdPaginated(userId: string, page: number, limit: number): Promise<PaginatedResult<GeneratedPost>> {
+    const supabase = createServerClient()
+    const offset = (page - 1) * limit
+
+    const { data, error } = await supabase
+      .from('generated_posts')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false })
+      .range(offset, offset + limit)
+
+    if (error) {
+      console.error('Error fetching paginated generated posts:', error)
+      throw error
+    }
+
+    return {
+      data: data.slice(0, limit).map(mapDbGeneratedPostToDomain),
+      hasMore: data.length > limit,
+    }
   }
 
   async create(postData: CreateGeneratedPostData): Promise<GeneratedPost> {
