@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import { CopyButton } from '@/features/post-generator/components/CopyButton'
+import { PublishLinkedInButton } from '@/features/post-generator/components/PublishLinkedInButton'
 import { ClockIcon, ChevronDownIcon } from '@/shared/components/icons'
 import type { GeneratedPost } from '@/domain/entities/generated-post'
 
@@ -119,8 +120,9 @@ export function HistoryPostCard({ post }: HistoryPostCardProps) {
             <p className="text-sm text-neutral-dark leading-relaxed whitespace-pre-wrap">
               {post.variants[activeVariant]}
             </p>
-            <div className="flex justify-end mt-3">
+            <div className="flex justify-end gap-2 mt-3">
               <CopyButton text={post.variants[activeVariant]} />
+              <PublishLinkedInButton text={post.variants[activeVariant]} />
             </div>
           </div>
         </div>
