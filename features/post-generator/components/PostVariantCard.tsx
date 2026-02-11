@@ -1,6 +1,7 @@
 'use client'
 
 import { CopyButton } from './CopyButton'
+import { PublishLinkedInButton } from './PublishLinkedInButton'
 
 interface PostVariantCardProps {
   variant: string
@@ -33,8 +34,9 @@ export function PostVariantCard({ variant, index }: PostVariantCardProps) {
         </p>
       </div>
 
-      <footer className="flex justify-end">
+      <footer className="flex justify-end gap-2">
         <CopyButton text={variant} />
+        <PublishLinkedInButton text={variant} />
       </footer>
     </article>
   )
